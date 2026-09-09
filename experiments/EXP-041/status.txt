@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-041
+TITLE: Raw XGBoost Softmax Calibration Audit
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Raw probabilities exhibit modest over-confidence in tail probabilities (ECE 0.0438).

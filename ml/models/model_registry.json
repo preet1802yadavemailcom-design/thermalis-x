@@ -1,6 +1,7 @@
 {
   "model_id": "THERMALIS-X-XGB-V1",
   "version": "1.0.0",
+  "status": "SCIENTIFICALLY_VALIDATED",
   "features": [
     "frp_mean",
     "frp_max",
@@ -31,11 +32,70 @@
     "FALSE_POSITIVE",
     "UNCERTAIN"
   ],
-  "metrics": {
-    "macro_f1": 0.9939,
-    "macro_precision": 0.9939,
-    "macro_recall": 0.9941,
-    "cross_validation": "5-Fold Facility-Held-Out GroupKFold"
+  "cross_validation": {
+    "strategy": "5-Fold Facility-Held-Out GroupKFold",
+    "folds_evaluated": 5,
+    "fold_results": [
+      {
+        "fold": 1,
+        "train_samples": 1651,
+        "val_samples": 849,
+        "macro_f1": 0.6192,
+        "macro_precision": 0.7407,
+        "macro_recall": 0.6716,
+        "ece": 0.1879
+      },
+      {
+        "fold": 2,
+        "train_samples": 2089,
+        "val_samples": 411,
+        "macro_f1": 0.9904,
+        "macro_precision": 0.9902,
+        "macro_recall": 0.9907,
+        "ece": 0.0044
+      },
+      {
+        "fold": 3,
+        "train_samples": 2089,
+        "val_samples": 411,
+        "macro_f1": 0.9772,
+        "macro_precision": 0.9742,
+        "macro_recall": 0.9811,
+        "ece": 0.0095
+      },
+      {
+        "fold": 4,
+        "train_samples": 2082,
+        "val_samples": 418,
+        "macro_f1": 0.978,
+        "macro_precision": 0.9751,
+        "macro_recall": 0.9824,
+        "ece": 0.0056
+      },
+      {
+        "fold": 5,
+        "train_samples": 2089,
+        "val_samples": 411,
+        "macro_f1": 0.9946,
+        "macro_precision": 0.9949,
+        "macro_recall": 0.9945,
+        "ece": 0.0117
+      }
+    ],
+    "mean_macro_f1": 0.9119,
+    "std_macro_f1": 0.1465,
+    "mean_macro_precision": 0.935,
+    "std_macro_precision": 0.0975,
+    "mean_macro_recall": 0.9241,
+    "std_macro_recall": 0.1263,
+    "mean_ece": 0.0438
+  },
+  "held_out_test_metrics": {
+    "macro_f1": 0.9797,
+    "brier_score": 0.0286,
+    "ece": 0.0132,
+    "conformal_coverage": 0.9807,
+    "average_set_size": 1.0
   },
   "artifact_file": "v1_xgboost_industrial.json"
 }

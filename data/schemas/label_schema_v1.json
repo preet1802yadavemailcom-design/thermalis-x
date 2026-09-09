@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.0.0",
+  "contract_name": "THERMALIS_LABEL_SCHEMA_V1",
+  "description": "Taxonomical grounding for THERMALIS-X. Strictly decouples raw sensor observations, clustered events, physical source classifications, baseline abnormality states, and administrative operational decisions.",
+  "ontology_entities": {
+    "Observation": "A single spaceborne instrument pixel measurement (e.g. VIIRS I4/I5 or MODIS B21/B31) with timestamp, coordinate, FRP, and brightness temperature.",
+    "Event": "A spatiotemporally contiguous cluster of observations formed via ST-DBSCAN within spatial radius eps_s (1.25 km) and temporal window eps_t (24 hours).",
+    "Episode": "A longitudinal sequence of events linked through split, merge, or continuation lineage over multi-week or multi-month intervals.",
+    "Incident": "An administrative emergency management entity declared by a District Disaster Management Authority (DDMA) or Fire Officer.",
+    "Attribution": "The spatial and operational association between an event and an industrial facility boundary (inside footprint vs off-site perimeter).",
+    "Abnormality": "A statistical excursion of thermal radiative power relative to a facility's robust rolling 180-day Median Absolute Deviation (MAD) baseline.",
+    "Decision": "An operational action taken by an analyst or automated response system (e.g. Cordon Perimeter, Dispatch NDRF/SDRF, Task Optical Satellite, Monitor CEMS)."
+  },
+  "classes": [
+    {
+      "code": "IND_ACCIDENT",
+      "index": 0,
+      "name": "Industrial Accident / Uncontrolled Blaze",
+      "definition": "Uncontrolled accidental fire occurring within or immediately adjacent to an industrial facility, characterized by significant baseline FRP excursion, spatial perimeter dilation, and anomalous smoke/plume drift.",
+      "evidence_requirements": ["High-contrast FRP surge (Z_MAD > 3.0)", "Spatial expansion or perimeter elongation", "Industrial landcover or proximity"],
+      "operational_severity_tier": "CRITICAL"
+    },
+    {
+      "code": "IND_NORMAL",
+      "index": 1,
+      "name": "Industrial Normal Operational Heat",
+      "definition": "Routine, steady-state high-temperature manufacturing processes (e.g. cement kilns, electric arc furnaces, ceramic kilns) operating within historical baseline MAD bounds.",
+      "evidence_requirements": ["FRP within 180-day baseline envelope (Z_MAD <= 3.0)", "Stationary geometric footprint", "Consistent operational revisit history"],
+      "operational_severity_tier": "INFORMATIONAL"
+    },
+    {
+      "code": "GAS_FLARE",
+      "index": 2,
+      "name": "Operational Gas Flare Stack",
+      "definition": "Point-source combustion of associated petroleum gas or process relief gas at refineries, petrochemical complexes, or offshore platforms.",
+      "evidence_requirements": ["Point-source morphology (compactness > 0.65, area < 2.0 ha)", "Extremely high sub-pixel temperature (>1000 K)", "Longitudinal multi-month persistence"],
+      "operational_severity_tier": "INFORMATIONAL"
+    },
+    {
+      "code": "WILDFIRE",
+      "index": 3,
+      "name": "Wildfire / Forest Fire",
+      "definition": "Uncontrolled vegetation fire in forest, shrubland, or grassland terrains, characterized by high perimeter spread velocity, large dynamic areal footprint, and forest landcover.",
+      "evidence_requirements": ["Forest/vegetation landcover", "Significant spread velocity (>0.3 km/h)", "Large contiguous area (>10 ha)"],
+      "operational_severity_tier": "WARNING"
+    },
+    {
+      "code": "AGRI_BURN",
+      "index": 4,
+      "name": "Agricultural Crop Residue Burn",
+      "definition": "Controlled post-harvest stubble burning (paddy/wheat straw) occurring in agricultural parcels, typically seasonal, short-lived, and low-to-moderate FRP.",
+      "evidence_requirements": ["Cropland landcover", "Short duration (<12 hours)", "Clustered regional spatial distribution"],
+      "operational_severity_tier": "WATCH"
+    },
+    {
+      "code": "MINE_HEAT",
+      "index": 5,
+      "name": "Mining Heat / Coal Seam Smoldering",
+      "definition": "Thermal emissions from open-cast mining operations, coal seam fires, or overburden spoil dumps, characterized by multi-year spatial stationarity and moderate, steady FRP.",
+      "evidence_requirements": ["Mining landcover / coalfield proximity", "Multi-week persistence ratio > 0.8", "Moderate FRP with low high-frequency variance"],
+      "operational_severity_tier": "WATCH"
+    },
+    {
+      "code": "POWER_HEAT",
+      "index": 6,
+      "name": "Thermal Power Generation Heat",
+      "definition": "Radiative heat signatures from thermal power generation boilers, cooling systems, or coal handling facilities operating within environmental norms.",
+      "evidence_requirements": ["Power plant infrastructure association", "Continuous 24/7 operational thermal persistence", "Moderate localized FRP"],
+      "operational_severity_tier": "INFORMATIONAL"
+    },
+    {
+      "code": "OTHER_NATURAL",
+      "index": 7,
+      "name": "Other Natural Thermal Sources",
+      "definition": "Volcanic activity, hydrothermal vents, or solar specular reflectance from desert sands or salt pans.",
+      "evidence_requirements": ["Remote non-industrial geography", "Barren landcover", "Absence of infrastructure"],
+      "operational_severity_tier": "INFORMATIONAL"
+    },
+    {
+      "code": "FALSE_POSITIVE",
+      "index": 8,
+      "name": "Sensor Artifact / False Alarm",
+      "definition": "Spurious detection caused by sun glint, cloud edge reflectance, high-albedo solar panels, or instrument transient noise.",
+      "evidence_requirements": ["Single transient observation without temporal confirmation", "Low brightness temperature contrast", "Solar geometry glint angle"],
+      "operational_severity_tier": "INFORMATIONAL"
+    },
+    {
+      "code": "UNCERTAIN",
+      "index": 9,
+      "name": "Uncertain / Conformal Abstention Candidate",
+      "definition": "Ambiguous event where sensor evidence is degraded (e.g. cloud cover), multi-class probability entropy is high (H > 0.60), or conflicting features prevent safe automated classification.",
+      "evidence_requirements": ["Conformal prediction set size |C(X)| > 1", "Normalized Shannon entropy H > 0.60", "Cloud optical degradation"],
+      "operational_severity_tier": "WATCH"
+    }
+  ]
+}

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-040
+TITLE: Multi-Class Softmax Objective vs One-vs-Rest
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Joint multi:softprob objective preserves coherent simplex probability distributions required for conformal prediction.

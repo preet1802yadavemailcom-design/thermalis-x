@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-017
+TITLE: Baseline Excursion Z-Score Cutoff Z > 2.0
+OUTCOME: REFUTED
+MACRO_F1: 0.8620
+ECE: 0.0580
+CONCLUSION: Z > 2.0 triggers excessive false alerts during minor process startups and routine furnace cleaning.

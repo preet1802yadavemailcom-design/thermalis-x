@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-021",
-  "macro_f1": 0.91,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.358,
+  "mean_ece": 0.15,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "FRP magnitude alone cannot distinguish 100 MW flaring from 100 MW forest fires or industrial disasters."
 }

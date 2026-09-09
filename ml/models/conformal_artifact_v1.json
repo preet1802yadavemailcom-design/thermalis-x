@@ -1,0 +1,9 @@
+{
+  "method": "Inductive Split Conformal Prediction",
+  "alpha": 0.1,
+  "nominal_coverage": 0.9,
+  "q_hat": 0.0396,
+  "empirical_test_coverage": 0.9807,
+  "average_set_size": 1.0,
+  "calibration_samples": 237
+}

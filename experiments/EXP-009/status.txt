@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-009
+TITLE: MinPts Threshold = 5 (Strict Density)
+OUTCOME: REFUTED
+MACRO_F1: 0.8340
+ECE: 0.0780
+CONCLUSION: MinPts=5 suppresses early-stage acute industrial fire outbreaks before multiple satellite passes accumulate.

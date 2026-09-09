@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-025
+TITLE: Addition of Isoperimetric Compactness & Spread Velocity
+OUTCOME: CONFIRMED
+MACRO_F1: 0.8980
+ECE: 0.1520
+CONCLUSION: Morphology dynamics cleanly separates point-source flares from sprawling perimeter wildfires.

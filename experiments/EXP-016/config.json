@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-016",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "MAD Scale Factor Normalization (k=1.4826)",
+  "hypothesis": "Evaluating impact of MAD Scale Factor Normalization (k=1.4826) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "stat": "mad_scaled_1.4826"
+  },
+  "random_seed": 58,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

@@ -38,28 +38,36 @@ class FeaturePipeline:
 
         # 3. Spatial Features
         area_ha = float(event.get("area_ha", 1.0))
-        # Compactness ratio: area / (perimeter^2) approximated
-        compactness = 0.8 if area_ha < 5.0 else 0.4
-        spread_velocity = (math.sqrt(area_ha) / max(0.5, duration_hours)) if duration_hours > 0 else 0.0
+        perimeter_m = float(event.get("perimeter_m", math.sqrt(area_ha * 10000.0) * 4.0))
+        area_sqm = max(100.0, area_ha * 10000.0)
+        # Isoperimetric compactness ratio: 4 * pi * A / P^2
+        if "compactness" in event:
+            compactness = float(event["compactness"])
+        elif perimeter_m > 0:
+            compactness = round(min(1.0, (4.0 * math.pi * area_sqm) / (perimeter_m ** 2)), 4)
+        else:
+            compactness = 0.5
+        spread_velocity = round((math.sqrt(area_ha / 100.0) / max(0.5, duration_hours)), 4) if duration_hours > 0 else 0.0
 
         # 4. Industrial Context Features
         dist_km = float(event.get("distance_to_facility_km", 999.0))
         is_near_facility = 1.0 if dist_km <= 2.0 else 0.0
-        inside_polygon = 1.0 if (facility and self.facility_service.is_inside_facility(event["centroid_lat"], event["centroid_lon"], facility)) else 0.0
+        inside_polygon = 1.0 if (facility and self.facility_service.is_inside_facility(event.get("centroid_lat", 0.0), event.get("centroid_lon", 0.0), facility)) else 0.0
 
-        # Facility type encoding
-        fac_type = facility.get("facility_type", "none") if facility else "none"
-        is_refinery = 1.0 if fac_type == "refinery" or fac_type == "petrochemical" else 0.0
-        is_coal_mine = 1.0 if fac_type == "coal_mine" else 0.0
+        # Facility type encoding strictly adhering to feature_schema_v1
+        fac_type = (facility.get("facility_type", "none") if facility else "none").lower()
+        is_refinery = 1.0 if fac_type in ["refinery", "petrochemical"] else 0.0
+        is_coal_mine = 1.0 if fac_type in ["coal_mine", "mine"] else 0.0
         is_power_plant = 1.0 if fac_type == "power_plant" else 0.0
         is_manufacturing = 1.0 if fac_type in ["ceramic_manufacturing", "steel", "cement"] else 0.0
 
-        # 5. Baseline Deviation Features
+        # 5. Baseline Deviation Features (MAD Z-score)
         if facility and facility.get("baseline_median_frp", 0.0) > 0:
             excursion = FacilityBaselineEngine.calculate_excursion(frp_max, facility)
-            frp_zscore = excursion["frp_zscore"]
-            frp_to_baseline = excursion["frp_to_baseline_ratio"]
-            is_baseline_excursion = 1.0 if excursion["is_baseline_excursion"] else 0.0
+            frp_zscore = float(excursion.get("frp_zscore", 0.0))
+            frp_to_baseline = float(excursion.get("frp_to_baseline_ratio", 1.0))
+            # Strict schema condition: Z > 3.0 and frp_max > 25.0
+            is_baseline_excursion = 1.0 if (frp_zscore > 3.0 and frp_max > 25.0) else 0.0
         else:
             frp_zscore = 0.0
             frp_to_baseline = 1.0

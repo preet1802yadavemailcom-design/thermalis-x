@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-014",
-  "macro_f1": 0.99,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.899,
+  "mean_ece": 0.046,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "365-day baseline is robust but sluggish in adapting to newly commissioned industrial capacity."
 }

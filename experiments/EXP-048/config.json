@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-048",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Information-Theoretic Selective Abstention Threshold (H > 0.60)",
+  "hypothesis": "Evaluating impact of Information-Theoretic Selective Abstention Threshold (H > 0.60) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "entropy_threshold": 0.6
+  },
+  "random_seed": 90,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

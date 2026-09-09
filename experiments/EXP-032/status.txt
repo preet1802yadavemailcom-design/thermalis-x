@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-032
+TITLE: Linear Softmax / Multinomial Logistic Regression
+OUTCOME: CONFIRMED
+MACRO_F1: 0.8880
+ECE: 0.0770
+CONCLUSION: Strong linear baseline demonstrates multimodal feature linearly separable foundation.

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-014
+TITLE: Historical Window 365-Day Baseline
+OUTCOME: CONFIRMED
+MACRO_F1: 0.8990
+ECE: 0.0460
+CONCLUSION: 365-day baseline is robust but sluggish in adapting to newly commissioned industrial capacity.

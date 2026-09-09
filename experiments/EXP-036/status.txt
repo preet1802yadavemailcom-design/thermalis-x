@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-036
+TITLE: XGBoost Depth 5 (Optimal Balanced Architecture)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Depth 5 with shrinkage lr=0.08 achieves optimal balance between facility generalization and calibration error.

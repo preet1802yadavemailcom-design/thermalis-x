@@ -1,0 +1,7 @@
+Ablation,Features_Kept,Dropped_Features,Mean_Macro_F1,Std_Macro_F1,Delta_F1
+Full_Model_All_16_Features,16,[],0.9112,0.1461,0.0
+Without_Facility_Baseline,14,"['frp_zscore', 'is_baseline_excursion']",0.9516,0.0661,0.0405
+Without_Morphology,13,"['area_ha', 'compactness', 'spread_velocity']",0.8453,0.215,-0.0659
+Without_Temporal_Dynamics,13,"['duration_hours', 'persistence_ratio', 'frp_trend']",0.9074,0.1447,-0.0037
+Without_Landcover,15,['landcover_class'],0.9203,0.1066,0.0091
+Without_Industrial_Context,11,"['is_refinery', 'is_coal_mine', 'is_power_plant', 'dist_to_facility_km', 'is_near_facility']",0.8938,0.1838,-0.0174

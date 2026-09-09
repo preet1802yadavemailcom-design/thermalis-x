@@ -86,6 +86,8 @@ class Event(Base):
     satellite_evidence = relationship("SatelliteEvidence", back_populates="event")
     alerts = relationship("Alert", back_populates="event")
     feedback = relationship("AnalystFeedback", back_populates="event")
+    evidence_objects = relationship("EvidenceObject", back_populates="event")
+    decision_ledger = relationship("DecisionLedger", back_populates="event")
 
 class Facility(Base):
     __tablename__ = "facilities"
@@ -158,9 +160,50 @@ class AnalystFeedback(Base):
     confidence = Column(Float, default=1.0)
     notes = Column(Text, nullable=True)
     evidence_reviewed_json = Column(Text, nullable=True)
+    status = Column(String(16), default="APPROVED")  # APPROVED, QUARANTINED, REJECTED
+    supervisor_id = Column(String(64), nullable=True)
+    supervisor_approved_at = Column(DateTime, nullable=True)
+    supervisor_notes = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     event = relationship("Event", back_populates="feedback")
+
+class EvidenceObject(Base):
+    __tablename__ = "evidence_objects"
+
+    id = Column(String(64), primary_key=True, default=generate_uuid)
+    event_id = Column(String(64), ForeignKey("events.id"), nullable=False)
+    evidence_type = Column(String(32), nullable=False)  # FIRMS_OBSERVATION, SATELLITE_SCENE, WEATHER_METAR, OSM_POLYGON, BASELINE_PROFILE
+    source_uri = Column(String(256), nullable=False)
+    sha256_hash = Column(String(64), nullable=False, index=True)
+    acquisition_timestamp = Column(DateTime, nullable=False)
+    payload_json = Column(Text, nullable=True)
+    data_quality_status = Column(String(16), default="VALID")  # VALID, SUSPECT, QUARANTINED
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    event = relationship("Event", back_populates="evidence_objects")
+
+class DecisionLedger(Base):
+    __tablename__ = "decision_ledger"
+
+    id = Column(String(64), primary_key=True, default=generate_uuid)
+    event_id = Column(String(64), ForeignKey("events.id"), nullable=False)
+    sequence_number = Column(Integer, nullable=False)
+    decision_type = Column(String(32), nullable=False)  # AI_INFERENCE, ANALYST_VERIFICATION, SUPERVISOR_APPROVAL, AUTO_SUPPRESS
+    actor_id = Column(String(64), nullable=False)
+    actor_role = Column(String(32), nullable=False)  # SYSTEM, ANALYST, SUPERVISOR
+    previous_state = Column(String(64), nullable=True)
+    new_state = Column(String(64), nullable=False)
+    decision_payload_json = Column(Text, nullable=False)
+    prev_hash = Column(String(64), nullable=False)
+    entry_hash = Column(String(64), nullable=False, unique=True, index=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+
+    event = relationship("Event", back_populates="decision_ledger")
+
+    __table_args__ = (
+        Index("idx_ledger_event_seq", "event_id", "sequence_number", unique=True),
+    )
 
 class AuditLog(Base):
     __tablename__ = "audit_log"

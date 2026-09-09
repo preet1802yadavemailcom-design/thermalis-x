@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-018",
-  "macro_f1": 0.88,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Z > 3.0 with FRP > 25 MW eliminates 92% of startup noise while maintaining 97% recall on genuine fire incidents."
 }

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-012
+TITLE: Historical Window 90-Day Rolling Baseline
+OUTCOME: REFUTED
+MACRO_F1: 0.8920
+ECE: 0.0490
+CONCLUSION: 90-day baseline captures quarter-level operations but misses bi-annual flaring cyclicity.

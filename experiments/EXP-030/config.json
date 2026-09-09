@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-030",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Full 16-Feature Multimodal Schema Contract",
+  "hypothesis": "Evaluating impact of Full 16-Feature Multimodal Schema Contract on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "feature_count": 16
+  },
+  "random_seed": 72,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

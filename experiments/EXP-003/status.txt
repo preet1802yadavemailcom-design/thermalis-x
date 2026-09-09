@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-003
+TITLE: ST-DBSCAN Spatial Epsilon Over-Smoothing (2.5 km)
+OUTCOME: REFUTED
+MACRO_F1: 0.8120
+ECE: 0.0890
+CONCLUSION: 2.5 km epsilon leads to severe chain-linking, merging external agricultural burns into refinery facilities.

@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-044",
-  "macro_f1": 0.99,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.024,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "Temperature scaling improves calibration but achieves higher ECE than two-parameter Platt scaling."
 }

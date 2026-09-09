@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-020
+TITLE: Dual-Gate Excursion Rule (Z > 3.0 AND FRP > 25 MW)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Dual-gate rule prevents micro-flares with tiny variance from triggering baseline excursions.

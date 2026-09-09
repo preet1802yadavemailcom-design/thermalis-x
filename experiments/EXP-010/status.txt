@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-010
+TITLE: Convex Hull vs Minimum Bounding Box Compactness
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Convex hull isoperimetric ratio (4*pi*A / P^2) exhibits superior invariance to satellite scan angle distortion.

@@ -1,0 +1,69 @@
+[
+  {
+    "Ablation": "Full_Model_All_16_Features",
+    "Features_Kept": 16,
+    "Dropped_Features": [],
+    "Mean_Macro_F1": 0.9112,
+    "Std_Macro_F1": 0.1461,
+    "Delta_F1": 0.0
+  },
+  {
+    "Ablation": "Without_Facility_Baseline",
+    "Features_Kept": 14,
+    "Dropped_Features": [
+      "frp_zscore",
+      "is_baseline_excursion"
+    ],
+    "Mean_Macro_F1": 0.9516,
+    "Std_Macro_F1": 0.0661,
+    "Delta_F1": 0.0405
+  },
+  {
+    "Ablation": "Without_Morphology",
+    "Features_Kept": 13,
+    "Dropped_Features": [
+      "area_ha",
+      "compactness",
+      "spread_velocity"
+    ],
+    "Mean_Macro_F1": 0.8453,
+    "Std_Macro_F1": 0.215,
+    "Delta_F1": -0.0659
+  },
+  {
+    "Ablation": "Without_Temporal_Dynamics",
+    "Features_Kept": 13,
+    "Dropped_Features": [
+      "duration_hours",
+      "persistence_ratio",
+      "frp_trend"
+    ],
+    "Mean_Macro_F1": 0.9074,
+    "Std_Macro_F1": 0.1447,
+    "Delta_F1": -0.0037
+  },
+  {
+    "Ablation": "Without_Landcover",
+    "Features_Kept": 15,
+    "Dropped_Features": [
+      "landcover_class"
+    ],
+    "Mean_Macro_F1": 0.9203,
+    "Std_Macro_F1": 0.1066,
+    "Delta_F1": 0.0091
+  },
+  {
+    "Ablation": "Without_Industrial_Context",
+    "Features_Kept": 11,
+    "Dropped_Features": [
+      "is_refinery",
+      "is_coal_mine",
+      "is_power_plant",
+      "dist_to_facility_km",
+      "is_near_facility"
+    ],
+    "Mean_Macro_F1": 0.8938,
+    "Std_Macro_F1": 0.1838,
+    "Delta_F1": -0.0174
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "Rung": "B0_FIRMS_Only",
+    "Model_Type": "random_forest",
+    "Feature_Count": 2,
+    "Mean_Macro_F1": 0.3584,
+    "Std_Macro_F1": 0.1052,
+    "Mean_Precision": 0.4158,
+    "Mean_Recall": 0.4381,
+    "Mean_ECE": 0.1499
+  },
+  {
+    "Rung": "B1_FIRMS_Spatial",
+    "Model_Type": "random_forest",
+    "Feature_Count": 4,
+    "Mean_Macro_F1": 0.6237,
+    "Std_Macro_F1": 0.0329,
+    "Mean_Precision": 0.6876,
+    "Mean_Recall": 0.672,
+    "Mean_ECE": 0.1073
+  },
+  {
+    "Rung": "B2_FIRMS_Landcover",
+    "Model_Type": "random_forest",
+    "Feature_Count": 5,
+    "Mean_Macro_F1": 0.7901,
+    "Std_Macro_F1": 0.0668,
+    "Mean_Precision": 0.8391,
+    "Mean_Recall": 0.8159,
+    "Mean_ECE": 0.1022
+  },
+  {
+    "Rung": "B3_FIRMS_Temporal",
+    "Model_Type": "random_forest",
+    "Feature_Count": 5,
+    "Mean_Macro_F1": 0.76,
+    "Std_Macro_F1": 0.0389,
+    "Mean_Precision": 0.8088,
+    "Mean_Recall": 0.7926,
+    "Mean_ECE": 0.0963
+  },
+  {
+    "Rung": "B4_FIRMS_Morphology",
+    "Model_Type": "random_forest",
+    "Feature_Count": 6,
+    "Mean_Macro_F1": 0.8979,
+    "Std_Macro_F1": 0.0597,
+    "Mean_Precision": 0.9231,
+    "Mean_Recall": 0.9169,
+    "Mean_ECE": 0.1521
+  },
+  {
+    "Rung": "B5_FIRMS_Facility_Baseline",
+    "Model_Type": "random_forest",
+    "Feature_Count": 5,
+    "Mean_Macro_F1": 0.6485,
+    "Std_Macro_F1": 0.1245,
+    "Mean_Precision": 0.6545,
+    "Mean_Recall": 0.7024,
+    "Mean_ECE": 0.1174
+  },
+  {
+    "Rung": "B6_Full_Multimodal_LogReg",
+    "Model_Type": "logistic_regression",
+    "Feature_Count": 16,
+    "Mean_Macro_F1": 0.8877,
+    "Std_Macro_F1": 0.1509,
+    "Mean_Precision": 0.9145,
+    "Mean_Recall": 0.8931,
+    "Mean_ECE": 0.0774
+  },
+  {
+    "Rung": "B7_Full_Multimodal_RF",
+    "Model_Type": "random_forest",
+    "Feature_Count": 16,
+    "Mean_Macro_F1": 0.9226,
+    "Std_Macro_F1": 0.0781,
+    "Mean_Precision": 0.9482,
+    "Mean_Recall": 0.9346,
+    "Mean_ECE": 0.1378
+  },
+  {
+    "Rung": "B8_Full_Multimodal_XGBoost",
+    "Model_Type": "xgboost",
+    "Feature_Count": 16,
+    "Mean_Macro_F1": 0.9119,
+    "Std_Macro_F1": 0.1465,
+    "Mean_Precision": 0.935,
+    "Mean_Recall": 0.9241,
+    "Mean_ECE": 0.0438
+  }
+]

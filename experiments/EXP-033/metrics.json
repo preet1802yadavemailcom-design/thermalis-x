@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-033",
-  "macro_f1": 0.88,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.908,
+  "mean_ece": 0.125,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "Random forest captures non-linear feature interactions without hyperparameter tuning."
 }

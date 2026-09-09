@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-016
+TITLE: MAD Scale Factor Normalization (k=1.4826)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Normal-consistent scale factor k=1.4826 yields asymptotically unbiased standard deviation estimates under null baseline flaring.

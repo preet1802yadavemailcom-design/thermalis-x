@@ -43,6 +43,12 @@ class FIRMSValidator:
         if "acq_date" not in record and "acq_datetime" not in record:
             return "INVALID", ["missing_timestamp"]
 
+        if "acq_date" in record and record["acq_date"] is not None:
+            try:
+                datetime.strptime(str(record["acq_date"]), "%Y-%m-%d")
+            except (ValueError, TypeError):
+                return "INVALID", ["malformed_date"]
+
         if reasons:
             return "SUSPECT", reasons
         return "VALID", []

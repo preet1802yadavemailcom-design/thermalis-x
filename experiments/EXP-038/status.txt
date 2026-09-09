@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-038
+TITLE: Subsample & Colsample Regularization (0.85 / 0.85)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Stochastic feature and sample subsampling prevents co-adaptation of facility type indicators.

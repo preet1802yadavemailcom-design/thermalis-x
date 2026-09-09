@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-034
+TITLE: Random Forest (120 Trees, Max Depth 8)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9230
+ECE: 0.1380
+CONCLUSION: High F1 score but exhibits elevated calibration error (ECE 0.1378) relative to gradient boosted trees.

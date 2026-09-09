@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-006
+TITLE: Temporal Window Epsilon 24 Hours
+OUTCOME: REFUTED
+MACRO_F1: 0.8650
+ECE: 0.0610
+CONCLUSION: 24-hour window bridges distinct daily shift firings and creates over-extended multi-day events.

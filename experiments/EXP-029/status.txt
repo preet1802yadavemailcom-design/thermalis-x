@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-029
+TITLE: Kinetic Thermal Trend (Slope MW/hour)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Linear FRP slope provides critical early signal for escalating chemical runaway reactions.

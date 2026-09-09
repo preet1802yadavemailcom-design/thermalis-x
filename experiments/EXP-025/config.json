@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-025",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Addition of Isoperimetric Compactness & Spread Velocity",
+  "hypothesis": "Evaluating impact of Addition of Isoperimetric Compactness & Spread Velocity on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "feature_count": 6
+  },
+  "random_seed": 67,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "CONFIRMED"
 }

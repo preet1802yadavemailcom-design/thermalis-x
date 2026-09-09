@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-044
+TITLE: Temperature Scaling (Single Parameter)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9120
+ECE: 0.0240
+CONCLUSION: Temperature scaling improves calibration but achieves higher ECE than two-parameter Platt scaling.

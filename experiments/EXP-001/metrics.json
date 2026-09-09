@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-001",
-  "macro_f1": 0.86,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.884,
+  "mean_ece": 0.052,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "0.5 km spatial radius causes fragmentation of extensive flaring corridors into disconnected false multi-events."
 }

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-047
+TITLE: Inductive Split Conformal Prediction (Alpha = 0.20 / 80% Coverage)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9120
+ECE: 0.0130
+CONCLUSION: 80% coverage generates ultra-sparse sets but increases risk of missing true accident hypothesis.

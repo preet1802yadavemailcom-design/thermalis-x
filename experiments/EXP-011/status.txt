@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-011
+TITLE: Historical Window 30-Day Rolling Baseline
+OUTCOME: REFUTED
+MACRO_F1: 0.8410
+ECE: 0.0650
+CONCLUSION: 30-day baseline is excessively sensitive to seasonal turnarounds and maintenance shutdowns.

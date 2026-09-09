@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-040",
-  "macro_f1": 0.95,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Joint multi:softprob objective preserves coherent simplex probability distributions required for conformal prediction."
 }

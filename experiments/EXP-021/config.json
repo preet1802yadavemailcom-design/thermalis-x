@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-021",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Univariate FRP Baseline (No Spatial/Temporal)",
+  "hypothesis": "Evaluating impact of Univariate FRP Baseline (No Spatial/Temporal) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "feature_count": 2
+  },
+  "random_seed": 63,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "REFUTED"
 }

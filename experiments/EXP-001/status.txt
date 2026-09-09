@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-001
+TITLE: ST-DBSCAN Spatial Epsilon Sensitivity (0.5 km vs 1.0 km)
+OUTCOME: REFUTED
+MACRO_F1: 0.8840
+ECE: 0.0520
+CONCLUSION: 0.5 km spatial radius causes fragmentation of extensive flaring corridors into disconnected false multi-events.

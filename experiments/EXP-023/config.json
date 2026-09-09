@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-023",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Addition of ESA WorldCover Landcover Codes",
+  "hypothesis": "Evaluating impact of Addition of ESA WorldCover Landcover Codes on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "feature_count": 5
+  },
+  "random_seed": 65,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "CONFIRMED"
 }

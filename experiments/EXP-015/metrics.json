@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-015",
-  "macro_f1": 0.85,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.824,
+  "mean_ece": 0.082,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "Mean/Std Z-scores suffer severe breakdown because routine flaring spikes heavily skew Gaussian sample statistics."
 }

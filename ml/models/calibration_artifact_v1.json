@@ -1,0 +1,8 @@
+{
+  "method": "Platt Scaling (Fitted Logistic)",
+  "platt_a": -0.025,
+  "platt_b": 5.5099,
+  "calibration_samples": 237,
+  "brier_score": 0.0286,
+  "ece": 0.0132
+}

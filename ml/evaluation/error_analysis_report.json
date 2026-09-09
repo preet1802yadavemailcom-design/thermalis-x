@@ -1,0 +1,694 @@
+{
+  "total_samples": 2500,
+  "total_errors": 268,
+  "error_rate_pct": 10.72,
+  "accuracy_pct": 89.28,
+  "bucket_distribution": {
+    "abstained_high_uncertainty": 81,
+    "flare_misclassified_as_accident": 0,
+    "accident_misclassified_as_flare": 0,
+    "wildfire_near_industry_misclassified_as_accident": 0,
+    "crop_burn_misclassified_as_wildfire": 0,
+    "industrial_normal_misclassified_as_accident": 0,
+    "subsurface_coal_fire_ambiguity": 0,
+    "other_confusion": 187
+  },
+  "sample_misclassifications": [
+    {
+      "sample_id": 1,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.595,
+      "margin": 0.198,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 19.4,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 13.01,
+        "compactness": 0.12,
+        "spread_velocity": 0.056
+      }
+    },
+    {
+      "sample_id": 2,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.053,
+      "margin": 0.972,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 40.9,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 25.3,
+        "compactness": 0.19,
+        "spread_velocity": 0.014
+      }
+    },
+    {
+      "sample_id": 13,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.121,
+      "margin": 0.921,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 37.5,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 28.17,
+        "compactness": 0.15,
+        "spread_velocity": 0.054
+      }
+    },
+    {
+      "sample_id": 15,
+      "facility_id": "FAC-NONE",
+      "true_class": "WILDFIRE",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.205,
+      "margin": 0.876,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 211.2,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 14.04,
+        "compactness": 0.07,
+        "spread_velocity": 0.013
+      }
+    },
+    {
+      "sample_id": 19,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.092,
+      "margin": 0.938,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 23.7,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 12.82,
+        "compactness": 0.14,
+        "spread_velocity": 0.064
+      }
+    },
+    {
+      "sample_id": 27,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.105,
+      "margin": 0.925,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 43.5,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 33.58,
+        "compactness": 0.17,
+        "spread_velocity": 0.066
+      }
+    },
+    {
+      "sample_id": 32,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.071,
+      "margin": 0.957,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 40.4,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 32.37,
+        "compactness": 0.13,
+        "spread_velocity": 0.033
+      }
+    },
+    {
+      "sample_id": 35,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.602,
+      "margin": 0.191,
+      "abstained": true,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "abstained_high_uncertainty",
+      "key_features": {
+        "frp_max": 14.4,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 20.21,
+        "compactness": 0.15,
+        "spread_velocity": 0.069
+      }
+    },
+    {
+      "sample_id": 56,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.082,
+      "margin": 0.946,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 42.4,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 12.13,
+        "compactness": 0.14,
+        "spread_velocity": 0.031
+      }
+    },
+    {
+      "sample_id": 65,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.078,
+      "margin": 0.951,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 37.0,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 23.98,
+        "compactness": 0.12,
+        "spread_velocity": 0.031
+      }
+    },
+    {
+      "sample_id": 73,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.52,
+      "margin": 0.456,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 14.8,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 28.2,
+        "compactness": 0.14,
+        "spread_velocity": 0.075
+      }
+    },
+    {
+      "sample_id": 75,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.607,
+      "margin": 0.449,
+      "abstained": true,
+      "conformal_set": [
+        "AGRI_BURN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "abstained_high_uncertainty",
+      "key_features": {
+        "frp_max": 17.8,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 4.31,
+        "compactness": 0.24,
+        "spread_velocity": 0.064
+      }
+    },
+    {
+      "sample_id": 93,
+      "facility_id": "FAC-NONE",
+      "true_class": "WILDFIRE",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.328,
+      "margin": 0.074,
+      "abstained": true,
+      "conformal_set": [
+        "WILDFIRE"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "abstained_high_uncertainty",
+      "key_features": {
+        "frp_max": 129.5,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 26.06,
+        "compactness": 0.02,
+        "spread_velocity": 0.072
+      }
+    },
+    {
+      "sample_id": 98,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.656,
+      "margin": 0.042,
+      "abstained": true,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "abstained_high_uncertainty",
+      "key_features": {
+        "frp_max": 34.1,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 15.95,
+        "compactness": 0.31,
+        "spread_velocity": 0.112
+      }
+    },
+    {
+      "sample_id": 134,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.572,
+      "margin": 0.3,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 20.4,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 24.67,
+        "compactness": 0.21,
+        "spread_velocity": 0.025
+      }
+    },
+    {
+      "sample_id": 136,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.087,
+      "margin": 0.943,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 28.6,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 18.34,
+        "compactness": 0.15,
+        "spread_velocity": 0.027
+      }
+    },
+    {
+      "sample_id": 141,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.532,
+      "margin": 0.379,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 21.8,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 34.26,
+        "compactness": 0.14,
+        "spread_velocity": 0.047
+      }
+    },
+    {
+      "sample_id": 142,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.104,
+      "margin": 0.926,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 29.9,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 9.99,
+        "compactness": 0.13,
+        "spread_velocity": 0.07
+      }
+    },
+    {
+      "sample_id": 144,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.081,
+      "margin": 0.946,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 42.3,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 12.45,
+        "compactness": 0.16,
+        "spread_velocity": 0.035
+      }
+    },
+    {
+      "sample_id": 145,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.075,
+      "margin": 0.952,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 34.3,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 20.36,
+        "compactness": 0.12,
+        "spread_velocity": 0.033
+      }
+    },
+    {
+      "sample_id": 152,
+      "facility_id": "FAC-REF-04",
+      "true_class": "GAS_FLARE",
+      "predicted_class": "IND_NORMAL",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.298,
+      "margin": 0.739,
+      "abstained": false,
+      "conformal_set": [
+        "IND_NORMAL"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 17.8,
+        "frp_zscore": -0.11,
+        "dist_to_facility_km": 0.25,
+        "compactness": 0.81,
+        "spread_velocity": 0.003
+      }
+    },
+    {
+      "sample_id": 176,
+      "facility_id": "FAC-NONE",
+      "true_class": "WILDFIRE",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.418,
+      "margin": 0.171,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 48.6,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 15.12,
+        "compactness": 0.02,
+        "spread_velocity": 0.012
+      }
+    },
+    {
+      "sample_id": 191,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.04,
+      "margin": 0.979,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 41.7,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 7.92,
+        "compactness": 0.12,
+        "spread_velocity": 0.034
+      }
+    },
+    {
+      "sample_id": 194,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.131,
+      "margin": 0.9,
+      "abstained": false,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ACCEPT",
+      "failure_bucket": "other_confusion",
+      "key_features": {
+        "frp_max": 38.8,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 13.86,
+        "compactness": 0.22,
+        "spread_velocity": 0.046
+      }
+    },
+    {
+      "sample_id": 199,
+      "facility_id": "FAC-NONE",
+      "true_class": "AGRI_BURN",
+      "predicted_class": "UNCERTAIN",
+      "calibrated_confidence": 0.99,
+      "entropy": 0.657,
+      "margin": 0.168,
+      "abstained": true,
+      "conformal_set": [
+        "UNCERTAIN"
+      ],
+      "decision_action": "ABSTAIN",
+      "failure_bucket": "abstained_high_uncertainty",
+      "key_features": {
+        "frp_max": 20.0,
+        "frp_zscore": 0.0,
+        "dist_to_facility_km": 13.87,
+        "compactness": 0.23,
+        "spread_velocity": 0.022
+      }
+    }
+  ],
+  "confusion_matrix": {
+    "IND_ACCIDENT": {
+      "IND_ACCIDENT": 250,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 0
+    },
+    "IND_NORMAL": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 243,
+      "GAS_FLARE": 2,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 3,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 2
+    },
+    "GAS_FLARE": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 1,
+      "GAS_FLARE": 248,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 1
+    },
+    "WILDFIRE": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 200,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 50
+    },
+    "AGRI_BURN": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 8,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 42,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 200
+    },
+    "MINE_HEAT": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 250,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 0
+    },
+    "POWER_HEAT": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 1,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 249,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 0
+    },
+    "OTHER_NATURAL": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 250,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 0
+    },
+    "FALSE_POSITIVE": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 250,
+      "UNCERTAIN": 0
+    },
+    "UNCERTAIN": {
+      "IND_ACCIDENT": 0,
+      "IND_NORMAL": 0,
+      "GAS_FLARE": 0,
+      "WILDFIRE": 0,
+      "AGRI_BURN": 0,
+      "MINE_HEAT": 0,
+      "POWER_HEAT": 0,
+      "OTHER_NATURAL": 0,
+      "FALSE_POSITIVE": 0,
+      "UNCERTAIN": 250
+    }
+  },
+  "mitigation_analysis": {
+    "uncertainty_abstained_errors": 112,
+    "effective_safety_net_pct": 41.79
+  }
+}

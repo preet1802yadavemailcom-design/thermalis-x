@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-006",
-  "macro_f1": 0.9939,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.865,
+  "mean_ece": 0.061,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "24-hour window bridges distinct daily shift firings and creates over-extended multi-day events."
 }

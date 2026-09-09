@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-035
+TITLE: XGBoost Depth 3 (Underfitting)
+OUTCOME: REFUTED
+MACRO_F1: 0.8760
+ECE: 0.0580
+CONCLUSION: Depth 3 fails to model complex 3-way interactions between facility type, baseline Z-score, and morphology.

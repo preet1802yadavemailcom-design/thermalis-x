@@ -1,5 +1,14 @@
 {
   "experiment_id": "EXP-013",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Historical Window 180-Day Rolling Baseline (Standard)",
+  "hypothesis": "Evaluating impact of Historical Window 180-Day Rolling Baseline (Standard) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "window_days": 180,
+    "stat": "median_mad"
+  },
+  "random_seed": 55,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

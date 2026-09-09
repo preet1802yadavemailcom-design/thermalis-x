@@ -1,0 +1,34 @@
+{
+  "pipeline_name": "THERMALIS-X-MASTER-REPRODUCIBILITY",
+  "status": "CERTIFIED_REPRODUCIBLE",
+  "timestamp_utc": "2026-09-09T15:35:03.484896+00:00",
+  "total_duration_seconds": 76.15,
+  "step_durations_seconds": {
+    "leakage_audit": 2.7,
+    "train_xgboost": 6.71,
+    "baseline_ladder": 15.99,
+    "ablation_study": 24.39,
+    "challenge_sets": 4.69,
+    "error_analysis": 7.97,
+    "experiment_registry": 0.33,
+    "pytest_suite": 7.62,
+    "acceptance_tests": 5.74
+  },
+  "python_version": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "artifact_checksums_sha256": {
+    "data/schemas/feature_schema_v1.json": "06a42d8d9b907ed7f77f30659cb447f60c2d2f656a17f16a9449b971c86d4778",
+    "data/schemas/label_schema_v1.json": "c3c58bc06d6f4a831c438a3516da4b47a93b98590f867079e7199dc86afbf09a",
+    "data/processed/benchmark_dataset_v1.csv": "a481b3e7980d135776b4599184b8830ee423b45c7baa35f31920d2e7dd126033",
+    "ml/models/v1_xgboost_industrial.json": "493c5d63096a83f19d133ecdbe08f48a6f9f59e4a6b578b1e11032115bea8a89",
+    "ml/models/calibration_artifact_v1.json": "260f2009290e1f951ab2f1187290d58ae1944824c6ffb247f5ec205e2fb11d27",
+    "ml/models/conformal_artifact_v1.json": "cc8091cc7cbb523d8084ebdd5785d316e14e5b6ac2137aeb9e38a723edab31de",
+    "ml/models/model_registry.json": "0536b95e10faf190bb70ed8f831dbc15ec8e64061b34ea8ea10c73b8fc13a98e",
+    "ml/evaluation/leakage_certificate.json": "5b3c1a9dc0aa4384173496e42f0c1abaea599768651d7c36a3b7b1e4c03427aa",
+    "ml/evaluation/baseline_ladder_results.json": "63622b2236c1f96202b688afdaf79c7aa47bcd7516f29ca9a3d022919aef5613",
+    "ml/evaluation/ablation_results.json": "985ad72493aa966f2e3a708d86efd8c3c4dce10e853dc767da5c226c14064716",
+    "ml/evaluation/challenge_set_results.json": "bae3ef3e5c13c7772c54f915b177dec91bc60c92f293971e19c9e72132d8cb49",
+    "ml/evaluation/error_analysis_report.json": "bc7beb21aacc8949a38d291a0eba28006d58441e2b8b8fa43b1fba2947905ee5",
+    "experiments/master_registry.json": "a541132ce57f8d9f429b8346d41f5f70d11c91bb0c9be8cacbb082c004ead452"
+  }
+}

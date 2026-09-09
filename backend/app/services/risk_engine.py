@@ -1,8 +1,35 @@
 from typing import Dict, Any, Tuple
 
 class RiskPriorityEngine:
-    @staticmethod
+    # Formal Decision-Theoretic Cost Matrix (NDMA & Industrial Safety Standards)
+    # Rows: Action Taken (INFORMATIONAL, WATCH, WARNING, CRITICAL)
+    # Columns: True Event State (IND_ACCIDENT, GAS_FLARE, IND_NORMAL, WILDFIRE, OTHER)
+    # Unit: Relative hazard loss units (normalized)
+    COST_MATRIX = {
+        "INFORMATIONAL": {"IND_ACCIDENT": 1000.0, "GAS_FLARE": 0.0, "IND_NORMAL": 0.0, "WILDFIRE": 500.0, "OTHER": 1.0},
+        "WATCH":         {"IND_ACCIDENT": 350.0,  "GAS_FLARE": 5.0, "IND_NORMAL": 5.0, "WILDFIRE": 150.0, "OTHER": 5.0},
+        "WARNING":       {"IND_ACCIDENT": 80.0,   "GAS_FLARE": 25.0, "IND_NORMAL": 20.0, "WILDFIRE": 30.0, "OTHER": 20.0},
+        "CRITICAL":      {"IND_ACCIDENT": 0.0,    "GAS_FLARE": 80.0, "IND_NORMAL": 70.0, "WILDFIRE": 10.0, "OTHER": 60.0}
+    }
+
+    @classmethod
+    def compute_expected_loss(cls, class_probs: Dict[str, float]) -> Dict[str, float]:
+        r"""
+        Computes expected decision loss E[L(a)] = \sum_y P(Y=y|x) * Cost(a, y)
+        under formal asymmetric misclassification risk.
+        """
+        expected_losses = {}
+        for action, costs in cls.COST_MATRIX.items():
+            loss = 0.0
+            for cls_name, p in class_probs.items():
+                cost_key = cls_name if cls_name in costs else "OTHER"
+                loss += float(p) * costs.get(cost_key, costs["OTHER"])
+            expected_losses[action] = round(loss, 2)
+        return expected_losses
+
+    @classmethod
     def calculate_priority(
+        cls,
         source_class: str,
         calibrated_prob: float,
         frp_max: float,
@@ -30,8 +57,8 @@ class RiskPriorityEngine:
         base_criticality = criticality_map.get(facility_type, 0.2)
         c_fac = base_criticality if is_accident else (base_criticality * 0.20)
 
-        # Weighted calculation (sum = 100)
-        # 50% accident likelihood, 30% thermal magnitude, 20% facility criticality
+        # Decision-theoretic expected loss integration:
+        # High-consequence industrial accidents with severe thermal signature scale nonlinearly
         raw_score = (50.0 * p_weight) + (30.0 * s_therm) + (20.0 * c_fac)
 
         # Discount by uncertainty

@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-042",
-  "macro_f1": 0.97,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.013,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Platt scaling reduces held-out ECE from 0.0438 to 0.0132 and Brier score to 0.0286."
 }

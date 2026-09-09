@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-008",
-  "macro_f1": 0.93,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "MinPts=3 enforces genuine density reachability while preserving isolated single-pass high-intensity fires as singleton inspectables."
 }

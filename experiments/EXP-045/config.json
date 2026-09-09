@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-045",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Inductive Split Conformal Prediction (Alpha = 0.05 / 95% Coverage)",
+  "hypothesis": "Evaluating impact of Inductive Split Conformal Prediction (Alpha = 0.05 / 95% Coverage) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "conformal_alpha": 0.05
+  },
+  "random_seed": 87,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "CONFIRMED"
 }

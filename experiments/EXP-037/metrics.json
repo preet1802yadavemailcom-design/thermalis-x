@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-037",
-  "macro_f1": 0.92,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.854,
+  "mean_ece": 0.095,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "Depth 9 memorizes training facility geometries, degrading unseen facility generalization."
 }

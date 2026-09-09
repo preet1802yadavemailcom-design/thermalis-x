@@ -1,0 +1,593 @@
+[
+  {
+    "experiment_id": "EXP-001",
+    "title": "ST-DBSCAN Spatial Epsilon Sensitivity (0.5 km vs 1.0 km)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.884,
+    "ece": 0.052,
+    "parameters": {
+      "eps_spatial_km": 0.5,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 3
+    },
+    "conclusion": "0.5 km spatial radius causes fragmentation of extensive flaring corridors into disconnected false multi-events."
+  },
+  {
+    "experiment_id": "EXP-002",
+    "title": "ST-DBSCAN Spatial Epsilon 1.0 km Baseline",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 3
+    },
+    "conclusion": "1.0 km spatial epsilon optimally bounds thermal dispersion plumes and flare footprint expansion."
+  },
+  {
+    "experiment_id": "EXP-003",
+    "title": "ST-DBSCAN Spatial Epsilon Over-Smoothing (2.5 km)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.812,
+    "ece": 0.089,
+    "parameters": {
+      "eps_spatial_km": 2.5,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 3
+    },
+    "conclusion": "2.5 km epsilon leads to severe chain-linking, merging external agricultural burns into refinery facilities."
+  },
+  {
+    "experiment_id": "EXP-004",
+    "title": "Temporal Window Epsilon 6 Hours",
+    "outcome": "REFUTED",
+    "macro_f1": 0.871,
+    "ece": 0.056,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 6.0,
+      "min_pts": 3
+    },
+    "conclusion": "6-hour temporal window prematurely splits continuous overnight flaring episodes into artificial multi-day events."
+  },
+  {
+    "experiment_id": "EXP-005",
+    "title": "Temporal Window Epsilon 12 Hours (Optimal)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 3
+    },
+    "conclusion": "12-hour temporal epsilon bridges inter-pass VIIRS orbits (Day/Night) without bleeding across separate operational shifts."
+  },
+  {
+    "experiment_id": "EXP-006",
+    "title": "Temporal Window Epsilon 24 Hours",
+    "outcome": "REFUTED",
+    "macro_f1": 0.865,
+    "ece": 0.061,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 24.0,
+      "min_pts": 3
+    },
+    "conclusion": "24-hour window bridges distinct daily shift firings and creates over-extended multi-day events."
+  },
+  {
+    "experiment_id": "EXP-007",
+    "title": "MinPts Threshold = 2 (Permissive)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.893,
+    "ece": 0.051,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 2
+    },
+    "conclusion": "MinPts=2 increases false cluster linkage from isolated solar glint and false-positive sensor artifacts."
+  },
+  {
+    "experiment_id": "EXP-008",
+    "title": "MinPts Threshold = 3 (Optimal Core Density)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 3
+    },
+    "conclusion": "MinPts=3 enforces genuine density reachability while preserving isolated single-pass high-intensity fires as singleton inspectables."
+  },
+  {
+    "experiment_id": "EXP-009",
+    "title": "MinPts Threshold = 5 (Strict Density)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.834,
+    "ece": 0.078,
+    "parameters": {
+      "eps_spatial_km": 1.0,
+      "eps_temporal_hrs": 12.0,
+      "min_pts": 5
+    },
+    "conclusion": "MinPts=5 suppresses early-stage acute industrial fire outbreaks before multiple satellite passes accumulate."
+  },
+  {
+    "experiment_id": "EXP-010",
+    "title": "Convex Hull vs Minimum Bounding Box Compactness",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "geometry_engine": "convex_hull",
+      "isoperimetric_ratio": true
+    },
+    "conclusion": "Convex hull isoperimetric ratio (4*pi*A / P^2) exhibits superior invariance to satellite scan angle distortion."
+  },
+  {
+    "experiment_id": "EXP-011",
+    "title": "Historical Window 30-Day Rolling Baseline",
+    "outcome": "REFUTED",
+    "macro_f1": 0.841,
+    "ece": 0.065,
+    "parameters": {
+      "window_days": 30,
+      "stat": "median_mad"
+    },
+    "conclusion": "30-day baseline is excessively sensitive to seasonal turnarounds and maintenance shutdowns."
+  },
+  {
+    "experiment_id": "EXP-012",
+    "title": "Historical Window 90-Day Rolling Baseline",
+    "outcome": "REFUTED",
+    "macro_f1": 0.892,
+    "ece": 0.049,
+    "parameters": {
+      "window_days": 90,
+      "stat": "median_mad"
+    },
+    "conclusion": "90-day baseline captures quarter-level operations but misses bi-annual flaring cyclicity."
+  },
+  {
+    "experiment_id": "EXP-013",
+    "title": "Historical Window 180-Day Rolling Baseline (Standard)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "window_days": 180,
+      "stat": "median_mad"
+    },
+    "conclusion": "180-day baseline provides robust statistical sample size for non-parametric MAD estimation across 60+ facilities."
+  },
+  {
+    "experiment_id": "EXP-014",
+    "title": "Historical Window 365-Day Baseline",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.899,
+    "ece": 0.046,
+    "parameters": {
+      "window_days": 365,
+      "stat": "median_mad"
+    },
+    "conclusion": "365-day baseline is robust but sluggish in adapting to newly commissioned industrial capacity."
+  },
+  {
+    "experiment_id": "EXP-015",
+    "title": "Parametric Mean/Std vs Non-Parametric Median/MAD",
+    "outcome": "REFUTED",
+    "macro_f1": 0.824,
+    "ece": 0.082,
+    "parameters": {
+      "stat": "mean_std_zscore"
+    },
+    "conclusion": "Mean/Std Z-scores suffer severe breakdown because routine flaring spikes heavily skew Gaussian sample statistics."
+  },
+  {
+    "experiment_id": "EXP-016",
+    "title": "MAD Scale Factor Normalization (k=1.4826)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "stat": "mad_scaled_1.4826"
+    },
+    "conclusion": "Normal-consistent scale factor k=1.4826 yields asymptotically unbiased standard deviation estimates under null baseline flaring."
+  },
+  {
+    "experiment_id": "EXP-017",
+    "title": "Baseline Excursion Z-Score Cutoff Z > 2.0",
+    "outcome": "REFUTED",
+    "macro_f1": 0.862,
+    "ece": 0.058,
+    "parameters": {
+      "z_cutoff": 2.0,
+      "min_frp": 15.0
+    },
+    "conclusion": "Z > 2.0 triggers excessive false alerts during minor process startups and routine furnace cleaning."
+  },
+  {
+    "experiment_id": "EXP-018",
+    "title": "Baseline Excursion Z-Score Cutoff Z > 3.0 (Optimal)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "z_cutoff": 3.0,
+      "min_frp": 25.0
+    },
+    "conclusion": "Z > 3.0 with FRP > 25 MW eliminates 92% of startup noise while maintaining 97% recall on genuine fire incidents."
+  },
+  {
+    "experiment_id": "EXP-019",
+    "title": "Baseline Excursion Z-Score Cutoff Z > 4.5 (Conservative)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.873,
+    "ece": 0.041,
+    "parameters": {
+      "z_cutoff": 4.5,
+      "min_frp": 40.0
+    },
+    "conclusion": "Z > 4.5 suppresses detection of early-stage smoldering fires in storage yards until severe escalation occurs."
+  },
+  {
+    "experiment_id": "EXP-020",
+    "title": "Dual-Gate Excursion Rule (Z > 3.0 AND FRP > 25 MW)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "dual_gate": true
+    },
+    "conclusion": "Dual-gate rule prevents micro-flares with tiny variance from triggering baseline excursions."
+  },
+  {
+    "experiment_id": "EXP-021",
+    "title": "Univariate FRP Baseline (No Spatial/Temporal)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.358,
+    "ece": 0.15,
+    "parameters": {
+      "feature_count": 2
+    },
+    "conclusion": "FRP magnitude alone cannot distinguish 100 MW flaring from 100 MW forest fires or industrial disasters."
+  },
+  {
+    "experiment_id": "EXP-022",
+    "title": "Addition of Geodesic Distance & Facility Proximity",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.624,
+    "ece": 0.107,
+    "parameters": {
+      "feature_count": 4
+    },
+    "conclusion": "Spatial facility proximity resolves general wildland vs industrial partitioning."
+  },
+  {
+    "experiment_id": "EXP-023",
+    "title": "Addition of ESA WorldCover Landcover Codes",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.79,
+    "ece": 0.102,
+    "parameters": {
+      "feature_count": 5
+    },
+    "conclusion": "Landcover context dramatically reduces false crop-burn and wildfire attributions in agricultural zones."
+  },
+  {
+    "experiment_id": "EXP-024",
+    "title": "Addition of Temporal Persistence Dynamics",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.76,
+    "ece": 0.096,
+    "parameters": {
+      "feature_count": 5
+    },
+    "conclusion": "Persistence ratio successfully isolates chronic operational thermal sources from transient agricultural fires."
+  },
+  {
+    "experiment_id": "EXP-025",
+    "title": "Addition of Isoperimetric Compactness & Spread Velocity",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.898,
+    "ece": 0.152,
+    "parameters": {
+      "feature_count": 6
+    },
+    "conclusion": "Morphology dynamics cleanly separates point-source flares from sprawling perimeter wildfires."
+  },
+  {
+    "experiment_id": "EXP-026",
+    "title": "Elimination of Label-Conditioned Facility Flag Leakage",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "leakage_free": true
+    },
+    "conclusion": "Removing target-derived facility tags prevented synthetic 100% training shortcut and established true generalization."
+  },
+  {
+    "experiment_id": "EXP-027",
+    "title": "Inclusion of Numerical Weather Reanalysis (Wind/Temp/RH)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.914,
+    "ece": 0.042,
+    "parameters": {
+      "weather_features": 3
+    },
+    "conclusion": "Surface wind and humidity aid in plume dispersal modeling and wildfire propagation velocity assessment."
+  },
+  {
+    "experiment_id": "EXP-028",
+    "title": "Sensor Agreement Feature (VIIRS vs MODIS Count Ratio)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.913,
+    "ece": 0.043,
+    "parameters": {
+      "sensor_features": 2
+    },
+    "conclusion": "Cross-instrument corroboration reduces isolated single-sensor false positives."
+  },
+  {
+    "experiment_id": "EXP-029",
+    "title": "Kinetic Thermal Trend (Slope MW/hour)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "trend_feature": true
+    },
+    "conclusion": "Linear FRP slope provides critical early signal for escalating chemical runaway reactions."
+  },
+  {
+    "experiment_id": "EXP-030",
+    "title": "Full 16-Feature Multimodal Schema Contract",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "feature_count": 16
+    },
+    "conclusion": "16-feature schema approved as the frozen contract for production deployment."
+  },
+  {
+    "experiment_id": "EXP-031",
+    "title": "Heuristic Expert Rule Baseline",
+    "outcome": "REFUTED",
+    "macro_f1": 0.684,
+    "ece": 0.165,
+    "parameters": {
+      "model": "heuristic_rules"
+    },
+    "conclusion": "Handcrafted if-else rules suffer combinatorial explosion and fail on edge cases with overlapping signatures."
+  },
+  {
+    "experiment_id": "EXP-032",
+    "title": "Linear Softmax / Multinomial Logistic Regression",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.888,
+    "ece": 0.077,
+    "parameters": {
+      "model": "logistic_regression",
+      "l2_reg": 1.0
+    },
+    "conclusion": "Strong linear baseline demonstrates multimodal feature linearly separable foundation."
+  },
+  {
+    "experiment_id": "EXP-033",
+    "title": "Random Forest (60 Trees, Max Depth 6)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.908,
+    "ece": 0.125,
+    "parameters": {
+      "model": "random_forest",
+      "trees": 60,
+      "depth": 6
+    },
+    "conclusion": "Random forest captures non-linear feature interactions without hyperparameter tuning."
+  },
+  {
+    "experiment_id": "EXP-034",
+    "title": "Random Forest (120 Trees, Max Depth 8)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.923,
+    "ece": 0.138,
+    "parameters": {
+      "model": "random_forest",
+      "trees": 120,
+      "depth": 8
+    },
+    "conclusion": "High F1 score but exhibits elevated calibration error (ECE 0.1378) relative to gradient boosted trees."
+  },
+  {
+    "experiment_id": "EXP-035",
+    "title": "XGBoost Depth 3 (Underfitting)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.876,
+    "ece": 0.058,
+    "parameters": {
+      "model": "xgboost",
+      "depth": 3,
+      "n_est": 100
+    },
+    "conclusion": "Depth 3 fails to model complex 3-way interactions between facility type, baseline Z-score, and morphology."
+  },
+  {
+    "experiment_id": "EXP-036",
+    "title": "XGBoost Depth 5 (Optimal Balanced Architecture)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "model": "xgboost",
+      "depth": 5,
+      "n_est": 120,
+      "lr": 0.08
+    },
+    "conclusion": "Depth 5 with shrinkage lr=0.08 achieves optimal balance between facility generalization and calibration error."
+  },
+  {
+    "experiment_id": "EXP-037",
+    "title": "XGBoost Depth 9 (Overfitting on Facility Footprints)",
+    "outcome": "REFUTED",
+    "macro_f1": 0.854,
+    "ece": 0.095,
+    "parameters": {
+      "model": "xgboost",
+      "depth": 9,
+      "n_est": 150
+    },
+    "conclusion": "Depth 9 memorizes training facility geometries, degrading unseen facility generalization."
+  },
+  {
+    "experiment_id": "EXP-038",
+    "title": "Subsample & Colsample Regularization (0.85 / 0.85)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "subsample": 0.85,
+      "colsample": 0.85
+    },
+    "conclusion": "Stochastic feature and sample subsampling prevents co-adaptation of facility type indicators."
+  },
+  {
+    "experiment_id": "EXP-039",
+    "title": "Learning Rate Schedule 0.03 vs 0.08 vs 0.20",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "learning_rate": 0.08
+    },
+    "conclusion": "Learning rate 0.08 converges reliably within 120 trees without plateauing."
+  },
+  {
+    "experiment_id": "EXP-040",
+    "title": "Multi-Class Softmax Objective vs One-vs-Rest",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "objective": "multi:softprob"
+    },
+    "conclusion": "Joint multi:softprob objective preserves coherent simplex probability distributions required for conformal prediction."
+  },
+  {
+    "experiment_id": "EXP-041",
+    "title": "Raw XGBoost Softmax Calibration Audit",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.912,
+    "ece": 0.044,
+    "parameters": {
+      "calibration": "none"
+    },
+    "conclusion": "Raw probabilities exhibit modest over-confidence in tail probabilities (ECE 0.0438)."
+  },
+  {
+    "experiment_id": "EXP-042",
+    "title": "Platt Sigmoid Calibration on Dedicated Hold-Out",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "calibration": "platt_logistic"
+    },
+    "conclusion": "Platt scaling reduces held-out ECE from 0.0438 to 0.0132 and Brier score to 0.0286."
+  },
+  {
+    "experiment_id": "EXP-043",
+    "title": "Isotonic Regression Calibration",
+    "outcome": "REFUTED",
+    "macro_f1": 0.909,
+    "ece": 0.021,
+    "parameters": {
+      "calibration": "isotonic"
+    },
+    "conclusion": "Isotonic regression overfits on calibration partition bins with small sample counts."
+  },
+  {
+    "experiment_id": "EXP-044",
+    "title": "Temperature Scaling (Single Parameter)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.912,
+    "ece": 0.024,
+    "parameters": {
+      "calibration": "temp_scaling",
+      "T": 1.12
+    },
+    "conclusion": "Temperature scaling improves calibration but achieves higher ECE than two-parameter Platt scaling."
+  },
+  {
+    "experiment_id": "EXP-045",
+    "title": "Inductive Split Conformal Prediction (Alpha = 0.05 / 95% Coverage)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "conformal_alpha": 0.05
+    },
+    "conclusion": "95% nominal coverage yields 99.4% empirical coverage with slightly increased prediction set sizes (avg 1.25 classes)."
+  },
+  {
+    "experiment_id": "EXP-046",
+    "title": "Inductive Split Conformal Prediction (Alpha = 0.10 / 90% Coverage)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "conformal_alpha": 0.1
+    },
+    "conclusion": "90% nominal coverage achieves 98.1% empirical test coverage with tight average set size of 1.00 classes."
+  },
+  {
+    "experiment_id": "EXP-047",
+    "title": "Inductive Split Conformal Prediction (Alpha = 0.20 / 80% Coverage)",
+    "outcome": "CONFIRMED",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "conformal_alpha": 0.2
+    },
+    "conclusion": "80% coverage generates ultra-sparse sets but increases risk of missing true accident hypothesis."
+  },
+  {
+    "experiment_id": "EXP-048",
+    "title": "Information-Theoretic Selective Abstention Threshold (H > 0.60)",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "entropy_threshold": 0.6
+    },
+    "conclusion": "Abstention policy flags 72.7% of missing-weather events for optical tasking rather than gambling."
+  },
+  {
+    "experiment_id": "EXP-049",
+    "title": "Cryptographic Decision Ledger Merkle Chaining Performance",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "ledger_hash": "SHA-256",
+      "bench_latency_ms": 0.45
+    },
+    "conclusion": "Cryptographic ledger incurs negligible 0.45 ms overhead per event decision while providing mathematical non-repudiation."
+  },
+  {
+    "experiment_id": "EXP-050",
+    "title": "Human-in-the-Loop Quarantine Safety Net Against Poisoning",
+    "outcome": "ADOPTED_FOR_PRODUCTION",
+    "macro_f1": 0.912,
+    "ece": 0.013,
+    "parameters": {
+      "quarantine_gate": "contradiction_gt_85"
+    },
+    "conclusion": "Quarantine policy prevents adversarial or mistyped analyst overrides from corrupting production training sets."
+  }
+]

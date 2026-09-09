@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-039",
-  "macro_f1": 0.9939,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Learning rate 0.08 converges reliably within 120 trees without plateauing."
 }

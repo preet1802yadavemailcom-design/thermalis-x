@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-018
+TITLE: Baseline Excursion Z-Score Cutoff Z > 3.0 (Optimal)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Z > 3.0 with FRP > 25 MW eliminates 92% of startup noise while maintaining 97% recall on genuine fire incidents.

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-037
+TITLE: XGBoost Depth 9 (Overfitting on Facility Footprints)
+OUTCOME: REFUTED
+MACRO_F1: 0.8540
+ECE: 0.0950
+CONCLUSION: Depth 9 memorizes training facility geometries, degrading unseen facility generalization.

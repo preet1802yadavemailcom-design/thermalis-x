@@ -111,26 +111,68 @@ def run_all_acceptance_tests():
     print(f"[PASS] AT-011: Open-Meteo Weather Plume Dispersion Context Validated (Wind: {weather['wind_speed_10m']} km/h, {weather['wind_direction_10m']} deg)")
     passed += 1
 
-    # AT-012: Human-in-the-Loop Analyst Verification Loop
-    fb = {
-        "event_id": "EVT-AT-002",
-        "verified_class": "IND_ACCIDENT",
-        "analyst_id": "lead_analyst_01",
-        "confidence": 1.0,
-        "evidence_reviewed": ["Sentinel-2 L2A SWIR", "Facility MAD Baseline"]
-    }
-    assert fb["verified_class"] == "IND_ACCIDENT" and len(fb["evidence_reviewed"]) == 2
-    print("[PASS] AT-012: Human-in-the-Loop Analyst Feedback Schema & Audit Log Validated")
+    # AT-012: Human-in-the-Loop Analyst Verification & Cryptographic Decision Ledger
+    from backend.app.db.session import SessionLocal
+    from backend.app.services.evidence_ledger import EvidenceLedgerService
+    db = SessionLocal()
+    try:
+        # Append initial AI decision
+        EvidenceLedgerService.append_decision(
+            db=db,
+            event_id="EVT-AT-002",
+            decision_type="AI_INFERENCE",
+            actor_id="SYSTEM_XGB",
+            actor_role="SYSTEM",
+            previous_state=None,
+            new_state="IND_ACCIDENT",
+            decision_payload={"calibrated_prob": 0.94, "conformal_set": ["IND_ACCIDENT"]}
+        )
+        # Append Analyst Verification
+        EvidenceLedgerService.append_decision(
+            db=db,
+            event_id="EVT-AT-002",
+            decision_type="ANALYST_VERIFICATION",
+            actor_id="lead_analyst_01",
+            actor_role="ANALYST",
+            previous_state="IND_ACCIDENT",
+            new_state="IND_ACCIDENT",
+            decision_payload={"notes": "Confirmed on Sentinel-2 SWIR", "confidence": 1.0}
+        )
+        db.commit()
+
+        # Audit decision ledger cryptographic chain
+        audit = EvidenceLedgerService.verify_event_ledger(db, "EVT-AT-002")
+        assert audit["is_valid"] is True
+        assert audit["entries_verified"] >= 2
+        assert audit["status"] == "CRYPTOGRAPHICALLY_VERIFIED"
+    finally:
+        db.close()
+    print("[PASS] AT-012: Human-in-the-Loop Feedback & Cryptographic Merkle Decision Ledger Validated")
     passed += 1
 
     # AT-013: Zero Facility Leakage Audit
     from ml.evaluation.leakage_audit import run_leakage_audit
-    run_leakage_audit()
+    leak_cert = run_leakage_audit()
+    assert leak_cert["status"] == "SCIENTIFICALLY_VALIDATED"
+    assert leak_cert["facility_isolation_verified"] is True
+    assert leak_cert["max_normalized_mutual_information"] < 0.70
     print("[PASS] AT-013: Automated Train/Test Facility-Held-Out Leakage Audit Validated")
     passed += 1
 
     # AT-014: Zero Circular Labeling Audit
-    print("[PASS] AT-014: Zero Circular Labeling Audit Validated (Normal heat & flares co-located with industry)")
+    import pandas as pd
+    b_df = pd.read_csv("data/processed/benchmark_dataset_v1.csv")
+    flares_near = b_df[(b_df["target_class"] == "GAS_FLARE") & (b_df["is_near_facility"] == 1.0)]
+    normal_near = b_df[(b_df["target_class"] == "IND_NORMAL") & (b_df["is_near_facility"] == 1.0)]
+    acc_near = b_df[(b_df["target_class"] == "IND_ACCIDENT") & (b_df["is_near_facility"] == 1.0)]
+    # Verify non-circularity: multiple non-accident classes occur near facilities
+    assert len(flares_near) > 50, "Gas flares must occur within facility footprints"
+    assert len(normal_near) > 50, "Normal heat must occur within facility footprints"
+    assert len(acc_near) > 50, "Accidents occur within facility footprints"
+    # Verify baseline excursion is not identical to accident label
+    excursions_in_non_accidents = b_df[(b_df["target_class"] != "IND_ACCIDENT") & (b_df["is_baseline_excursion"] == 1.0)]
+    assert len(excursions_in_non_accidents) > 0, "Non-accident baseline excursions must exist (process upsets)"
+    print(f"[PASS] AT-014: Zero Circular Labeling Formally Validated ({len(flares_near)} flares, {len(normal_near)} normal heat co-located with industry)")
     passed += 1
 
     # AT-015: Historical Offline Replay Integrity

@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-004",
-  "macro_f1": 0.89,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.871,
+  "mean_ece": 0.056,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "6-hour temporal window prematurely splits continuous overnight flaring episodes into artificial multi-day events."
 }

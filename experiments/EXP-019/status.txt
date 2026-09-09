@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-019
+TITLE: Baseline Excursion Z-Score Cutoff Z > 4.5 (Conservative)
+OUTCOME: REFUTED
+MACRO_F1: 0.8730
+ECE: 0.0410
+CONCLUSION: Z > 4.5 suppresses detection of early-stage smoldering fires in storage yards until severe escalation occurs.

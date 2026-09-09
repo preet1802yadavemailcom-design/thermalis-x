@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-022
+TITLE: Addition of Geodesic Distance & Facility Proximity
+OUTCOME: CONFIRMED
+MACRO_F1: 0.6240
+ECE: 0.1070
+CONCLUSION: Spatial facility proximity resolves general wildland vs industrial partitioning.

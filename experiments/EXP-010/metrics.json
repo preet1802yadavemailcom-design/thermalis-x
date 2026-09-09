@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-010",
-  "macro_f1": 0.95,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Convex hull isoperimetric ratio (4*pi*A / P^2) exhibits superior invariance to satellite scan angle distortion."
 }

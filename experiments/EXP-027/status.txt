@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-027
+TITLE: Inclusion of Numerical Weather Reanalysis (Wind/Temp/RH)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9140
+ECE: 0.0420
+CONCLUSION: Surface wind and humidity aid in plume dispersal modeling and wildfire propagation velocity assessment.

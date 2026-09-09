@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-050
+TITLE: Human-in-the-Loop Quarantine Safety Net Against Poisoning
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0130
+CONCLUSION: Quarantine policy prevents adversarial or mistyped analyst overrides from corrupting production training sets.

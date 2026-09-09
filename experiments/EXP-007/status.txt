@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-007
+TITLE: MinPts Threshold = 2 (Permissive)
+OUTCOME: REFUTED
+MACRO_F1: 0.8930
+ECE: 0.0510
+CONCLUSION: MinPts=2 increases false cluster linkage from isolated solar glint and false-positive sensor artifacts.

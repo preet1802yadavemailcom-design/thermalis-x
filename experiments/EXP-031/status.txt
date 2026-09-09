@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-031
+TITLE: Heuristic Expert Rule Baseline
+OUTCOME: REFUTED
+MACRO_F1: 0.6840
+ECE: 0.1650
+CONCLUSION: Handcrafted if-else rules suffer combinatorial explosion and fail on edge cases with overlapping signatures.

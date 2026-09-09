@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-004
+TITLE: Temporal Window Epsilon 6 Hours
+OUTCOME: REFUTED
+MACRO_F1: 0.8710
+ECE: 0.0560
+CONCLUSION: 6-hour temporal window prematurely splits continuous overnight flaring episodes into artificial multi-day events.

@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-013
+TITLE: Historical Window 180-Day Rolling Baseline (Standard)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: 180-day baseline provides robust statistical sample size for non-parametric MAD estimation across 60+ facilities.

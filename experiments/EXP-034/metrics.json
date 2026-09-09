@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-034",
-  "macro_f1": 0.89,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.923,
+  "mean_ece": 0.138,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "High F1 score but exhibits elevated calibration error (ECE 0.1378) relative to gradient boosted trees."
 }

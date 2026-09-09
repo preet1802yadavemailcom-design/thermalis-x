@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-015
+TITLE: Parametric Mean/Std vs Non-Parametric Median/MAD
+OUTCOME: REFUTED
+MACRO_F1: 0.8240
+ECE: 0.0820
+CONCLUSION: Mean/Std Z-scores suffer severe breakdown because routine flaring spikes heavily skew Gaussian sample statistics.

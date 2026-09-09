@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-023
+TITLE: Addition of ESA WorldCover Landcover Codes
+OUTCOME: CONFIRMED
+MACRO_F1: 0.7900
+ECE: 0.1020
+CONCLUSION: Landcover context dramatically reduces false crop-burn and wildfire attributions in agricultural zones.

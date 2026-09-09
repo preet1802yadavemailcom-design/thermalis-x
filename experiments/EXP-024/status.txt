@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-024
+TITLE: Addition of Temporal Persistence Dynamics
+OUTCOME: CONFIRMED
+MACRO_F1: 0.7600
+ECE: 0.0960
+CONCLUSION: Persistence ratio successfully isolates chronic operational thermal sources from transient agricultural fires.

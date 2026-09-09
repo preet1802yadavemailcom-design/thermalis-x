@@ -1,5 +1,15 @@
 {
   "experiment_id": "EXP-009",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "MinPts Threshold = 5 (Strict Density)",
+  "hypothesis": "Evaluating impact of MinPts Threshold = 5 (Strict Density) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "eps_spatial_km": 1.0,
+    "eps_temporal_hrs": 12.0,
+    "min_pts": 5
+  },
+  "random_seed": 51,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "REFUTED"
 }

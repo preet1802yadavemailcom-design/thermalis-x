@@ -1,5 +1,14 @@
 {
   "experiment_id": "EXP-038",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Subsample & Colsample Regularization (0.85 / 0.85)",
+  "hypothesis": "Evaluating impact of Subsample & Colsample Regularization (0.85 / 0.85) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "subsample": 0.85,
+    "colsample": 0.85
+  },
+  "random_seed": 80,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

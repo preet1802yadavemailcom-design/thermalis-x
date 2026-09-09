@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-033
+TITLE: Random Forest (60 Trees, Max Depth 6)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9080
+ECE: 0.1250
+CONCLUSION: Random forest captures non-linear feature interactions without hyperparameter tuning.

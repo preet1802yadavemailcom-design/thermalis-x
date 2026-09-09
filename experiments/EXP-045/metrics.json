@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-045",
-  "macro_f1": 0.85,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.013,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "95% nominal coverage yields 99.4% empirical coverage with slightly increased prediction set sizes (avg 1.25 classes)."
 }

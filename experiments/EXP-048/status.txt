@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-048
+TITLE: Information-Theoretic Selective Abstention Threshold (H > 0.60)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0130
+CONCLUSION: Abstention policy flags 72.7% of missing-weather events for optical tasking rather than gambling.

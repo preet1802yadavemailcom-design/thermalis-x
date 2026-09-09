@@ -1,5 +1,15 @@
 {
   "experiment_id": "EXP-001",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "ST-DBSCAN Spatial Epsilon Sensitivity (0.5 km vs 1.0 km)",
+  "hypothesis": "Evaluating impact of ST-DBSCAN Spatial Epsilon Sensitivity (0.5 km vs 1.0 km) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "eps_spatial_km": 0.5,
+    "eps_temporal_hrs": 12.0,
+    "min_pts": 3
+  },
+  "random_seed": 43,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "REFUTED"
 }

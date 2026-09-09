@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-031",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Heuristic Expert Rule Baseline",
+  "hypothesis": "Evaluating impact of Heuristic Expert Rule Baseline on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "model": "heuristic_rules"
+  },
+  "random_seed": 73,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "REFUTED"
 }

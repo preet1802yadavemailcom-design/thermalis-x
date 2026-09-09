@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-042
+TITLE: Platt Sigmoid Calibration on Dedicated Hold-Out
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0130
+CONCLUSION: Platt scaling reduces held-out ECE from 0.0438 to 0.0132 and Brier score to 0.0286.

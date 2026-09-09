@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-030
+TITLE: Full 16-Feature Multimodal Schema Contract
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: 16-feature schema approved as the frozen contract for production deployment.

@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-016",
-  "macro_f1": 0.86,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "Normal-consistent scale factor k=1.4826 yields asymptotically unbiased standard deviation estimates under null baseline flaring."
 }

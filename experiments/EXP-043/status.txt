@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-043
+TITLE: Isotonic Regression Calibration
+OUTCOME: REFUTED
+MACRO_F1: 0.9090
+ECE: 0.0210
+CONCLUSION: Isotonic regression overfits on calibration partition bins with small sample counts.

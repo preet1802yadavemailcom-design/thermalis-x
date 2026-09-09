@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-028
+TITLE: Sensor Agreement Feature (VIIRS vs MODIS Count Ratio)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9130
+ECE: 0.0430
+CONCLUSION: Cross-instrument corroboration reduces isolated single-sensor false positives.

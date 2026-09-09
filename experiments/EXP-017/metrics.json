@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-017",
-  "macro_f1": 0.87,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.862,
+  "mean_ece": 0.058,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "Z > 2.0 triggers excessive false alerts during minor process startups and routine furnace cleaning."
 }

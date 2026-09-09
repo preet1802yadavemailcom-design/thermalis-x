@@ -1,0 +1,62 @@
+{
+  "Cloud_Obscuration": {
+    "samples": 150,
+    "raw_accuracy": 0.0133,
+    "conformal_coverage": 0.0267,
+    "accept_rate": 1.0,
+    "review_rate": 0.0,
+    "abstain_rate": 0.0,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.2294
+  },
+  "Missing_Weather": {
+    "samples": 150,
+    "raw_accuracy": 0.14,
+    "conformal_coverage": 0.1867,
+    "accept_rate": 0.2467,
+    "review_rate": 0.0267,
+    "abstain_rate": 0.7267,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.6272
+  },
+  "Unmapped_Facility": {
+    "samples": 150,
+    "raw_accuracy": 0.1333,
+    "conformal_coverage": 0.16,
+    "accept_rate": 0.46,
+    "review_rate": 0.0067,
+    "abstain_rate": 0.5333,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.4609
+  },
+  "Novel_Facility_Type": {
+    "samples": 150,
+    "raw_accuracy": 0.9333,
+    "conformal_coverage": 0.96,
+    "accept_rate": 0.9733,
+    "review_rate": 0.0267,
+    "abstain_rate": 0.0,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.1617
+  },
+  "Extreme_FRP_Outlier": {
+    "samples": 150,
+    "raw_accuracy": 0.52,
+    "conformal_coverage": 0.5533,
+    "accept_rate": 1.0,
+    "review_rate": 0.0,
+    "abstain_rate": 0.0,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.2833
+  },
+  "Wildfire_Facility_Adjacency": {
+    "samples": 150,
+    "raw_accuracy": 0.2333,
+    "conformal_coverage": 0.48,
+    "accept_rate": 0.9733,
+    "review_rate": 0.0267,
+    "abstain_rate": 0.0,
+    "mean_calibrated_confidence": 0.99,
+    "mean_entropy": 0.4011
+  }
+}

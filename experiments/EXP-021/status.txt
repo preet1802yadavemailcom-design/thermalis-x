@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-021
+TITLE: Univariate FRP Baseline (No Spatial/Temporal)
+OUTCOME: REFUTED
+MACRO_F1: 0.3580
+ECE: 0.1500
+CONCLUSION: FRP magnitude alone cannot distinguish 100 MW flaring from 100 MW forest fires or industrial disasters.

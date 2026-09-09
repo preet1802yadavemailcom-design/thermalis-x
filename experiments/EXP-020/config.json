@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-020",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Dual-Gate Excursion Rule (Z > 3.0 AND FRP > 25 MW)",
+  "hypothesis": "Evaluating impact of Dual-Gate Excursion Rule (Z > 3.0 AND FRP > 25 MW) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "dual_gate": true
+  },
+  "random_seed": 62,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }

@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-012",
-  "macro_f1": 0.9939,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.892,
+  "mean_ece": 0.049,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "90-day baseline captures quarter-level operations but misses bi-annual flaring cyclicity."
 }

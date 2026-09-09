@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-043",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Isotonic Regression Calibration",
+  "hypothesis": "Evaluating impact of Isotonic Regression Calibration on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "calibration": "isotonic"
+  },
+  "random_seed": 85,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "REFUTED"
 }

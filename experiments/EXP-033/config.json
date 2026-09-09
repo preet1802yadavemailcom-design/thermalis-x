@@ -1,5 +1,15 @@
 {
   "experiment_id": "EXP-033",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Random Forest (60 Trees, Max Depth 6)",
+  "hypothesis": "Evaluating impact of Random Forest (60 Trees, Max Depth 6) on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "model": "random_forest",
+    "trees": 60,
+    "depth": 6
+  },
+  "random_seed": 75,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "CONFIRMED"
 }

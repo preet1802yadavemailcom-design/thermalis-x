@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-013",
-  "macro_f1": 0.98,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.912,
+  "mean_ece": 0.044,
+  "outcome": "ADOPTED_FOR_PRODUCTION",
+  "scientific_conclusion": "180-day baseline provides robust statistical sample size for non-parametric MAD estimation across 60+ facilities."
 }

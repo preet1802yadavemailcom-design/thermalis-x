@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-008
+TITLE: MinPts Threshold = 3 (Optimal Core Density)
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: MinPts=3 enforces genuine density reachability while preserving isolated single-pass high-intensity fires as singleton inspectables.

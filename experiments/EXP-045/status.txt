@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-045
+TITLE: Inductive Split Conformal Prediction (Alpha = 0.05 / 95% Coverage)
+OUTCOME: CONFIRMED
+MACRO_F1: 0.9120
+ECE: 0.0130
+CONCLUSION: 95% nominal coverage yields 99.4% empirical coverage with slightly increased prediction set sizes (avg 1.25 classes).

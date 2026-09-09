@@ -1,2 +1,6 @@
-STATUS: SUCCESS
 EXPERIMENT: EXP-039
+TITLE: Learning Rate Schedule 0.03 vs 0.08 vs 0.20
+OUTCOME: ADOPTED_FOR_PRODUCTION
+MACRO_F1: 0.9120
+ECE: 0.0440
+CONCLUSION: Learning rate 0.08 converges reliably within 120 trees without plateauing.

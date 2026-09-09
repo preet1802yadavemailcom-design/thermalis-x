@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-019",
-  "macro_f1": 0.89,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.873,
+  "mean_ece": 0.041,
+  "outcome": "REFUTED",
+  "scientific_conclusion": "Z > 4.5 suppresses detection of early-stage smoldering fires in storage yards until severe escalation occurs."
 }

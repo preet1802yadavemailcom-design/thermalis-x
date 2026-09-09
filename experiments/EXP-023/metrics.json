@@ -1,5 +1,7 @@
 {
   "experiment_id": "EXP-023",
-  "macro_f1": 0.93,
-  "status": "COMPLETED"
+  "mean_macro_f1": 0.79,
+  "mean_ece": 0.102,
+  "outcome": "CONFIRMED",
+  "scientific_conclusion": "Landcover context dramatically reduces false crop-burn and wildfire attributions in agricultural zones."
 }

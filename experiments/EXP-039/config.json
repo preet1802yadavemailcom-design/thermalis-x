@@ -1,5 +1,13 @@
 {
   "experiment_id": "EXP-039",
-  "framework": "XGBoost 3.3.0 / Scikit-Learn 1.9.0",
-  "status": "COMPLETED"
+  "title": "Learning Rate Schedule 0.03 vs 0.08 vs 0.20",
+  "hypothesis": "Evaluating impact of Learning Rate Schedule 0.03 vs 0.08 vs 0.20 on facility-held-out generalization, calibration, and operational safety.",
+  "parameters": {
+    "learning_rate": 0.08
+  },
+  "random_seed": 81,
+  "cv_strategy": "5-Fold Facility-Held-Out GroupKFold",
+  "features_used": 16,
+  "status": "COMPLETED",
+  "outcome": "ADOPTED_FOR_PRODUCTION"
 }
