@@ -1,0 +1,29 @@
+{
+  "name": "thermalis-x-console",
+  "version": "1.0.0",
+  "description": "THERMALIS-X Geospatial Industrial Thermal Intelligence and Early Warning GIS Console",
+  "main": "src/App.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "chart.js": "^4.4.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "keywords": [
+    "gis",
+    "leaflet",
+    "nasa-firms",
+    "remote-sensing",
+    "thermal-anomaly",
+    "disaster-management",
+    "conformal-prediction"
+  ],
+  "author": "THERMALIS-X Team",
+  "license": "Apache-2.0"
+}

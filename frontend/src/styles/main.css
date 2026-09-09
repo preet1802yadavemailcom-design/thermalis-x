@@ -1,0 +1,21 @@
+/* THERMALIS-X Dark-Mode Modern Industrial UI Theme */
+:root {
+  --bg-base: #0a0e17;
+  --bg-surface: #111827;
+  --bg-surface-elevated: #1f2937;
+  --border-color: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --color-critical: #ef4444;
+  --color-warning: #f59e0b;
+  --color-watch: #3b82f6;
+  --color-info: #10b981;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}

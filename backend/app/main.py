@@ -66,16 +66,16 @@ async def docs_hub_redirect():
 # Root UI route
 @app.get("/")
 async def root_index():
-    index_path = os.path.join("frontend", "dist", "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
+    for p in [os.path.join("frontend", "dist", "index.html"), os.path.join("frontend", "index.html")]:
+        if os.path.exists(p):
+            return FileResponse(p)
     return {"message": f"{settings.APP_NAME} API Online. Visit /docs for OpenAPI documentation."}
 
 @app.get("/index.html")
 async def root_index_file():
-    index_path = os.path.join("frontend", "dist", "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
+    for p in [os.path.join("frontend", "dist", "index.html"), os.path.join("frontend", "index.html")]:
+        if os.path.exists(p):
+            return FileResponse(p)
     return {"message": f"{settings.APP_NAME} API Online."}
 
 @app.exception_handler(Exception)
