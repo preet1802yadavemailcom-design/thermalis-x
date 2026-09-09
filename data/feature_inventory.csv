@@ -1,0 +1,49 @@
+Feature_Name,Data_Type,Units,Physical_Description,Data_Source,Update_Cadence,Imputation_Strategy
+frp_mean,float,MW,Mean Fire Radiative Power across active cluster observations,VIIRS/MODIS,Per pass,Impute cluster mean
+frp_max,float,MW,Maximum observed Fire Radiative Power in cluster,VIIRS/MODIS,Per pass,Impute cluster mean
+frp_median,float,MW,Median FRP (robust against sensor saturation spikes),VIIRS/MODIS,Per pass,Impute cluster median
+frp_std,float,MW,Standard deviation of FRP within cluster,VIIRS/MODIS,Per pass,0.0 for singleton
+frp_p90,float,MW,90th percentile FRP across detection points,VIIRS/MODIS,Per pass,Impute max FRP
+frp_trend,float,MW/hr,First-order temporal polynomial slope of FRP,Derived,Continuous,0.0 for duration < 1h
+brightness_mean,float,Kelvin,Mean 3.9 um brightness temperature,VIIRS I4 / MODIS B21,Per pass,Default 305.0 K
+brightness_max,float,Kelvin,Peak 3.9 um brightness temperature in cluster,VIIRS I4 / MODIS B21,Per pass,Default 310.0 K
+thermal_contrast,float,Kelvin,Delta between peak brightness and ambient background (295K),Derived,Per pass,Default 15.0 K
+duration_hours,float,hours,Elapsed time between first and most recent detection,Derived,Continuous,0.0 for single pass
+obs_count,int,count,Total number of active satellite pixels in spatiotemporal cluster,Aggregated,Per pass,Minimum 1
+persistence_ratio,float,ratio,Ratio of active detection passes to theoretical revisit passes,Derived,Daily,"Bounded [0.0, 1.0]"
+recurrence_score,float,score,Historical 180-day thermal recurrence index at exact location,Baseline DB,180-day rolling,0.0 for novel site
+area_ha,float,hectares,Convex hull surface area enclosing detection centroids,GIS Derived,Continuous,0.5 ha point proxy
+compactness,float,ratio,Isoperimetric quotient (area to perimeter ratio),GIS Derived,Continuous,0.8 point proxy
+spread_velocity,float,m/hr,Rate of radial expansion of cluster perimeter,Derived,Continuous,0.0 for stationary
+dist_to_facility_km,float,km,Haversine distance from cluster centroid to nearest OSM facility,OSM GIS,Static lookup,999.0 if isolated
+is_near_facility,binary,bool,Flag indicating whether centroid is within 2.0 km of facility,OSM GIS,Static lookup,0.0
+inside_facility_polygon,binary,bool,Shapely point-in-polygon containment test inside boundary,OSM GIS,Static lookup,0.0
+is_refinery,binary,bool,Target facility operates crude distillation / petrochemicals,OSM/CEMS,Static lookup,0.0
+is_coal_mine,binary,bool,Target facility is open-cast or underground coal mine,Ministry Coal/OSM,Static lookup,0.0
+is_power_plant,binary,bool,Target facility is thermal power generation station,Central Elec Auth,Static lookup,0.0
+is_manufacturing,binary,bool,"Target facility is ceramic, steel, or cement manufacturing",OSM/DIC,Static lookup,0.0
+baseline_median_frp,float,MW,180-day rolling robust median FRP for matched facility,Baseline DB,Daily update,0.0 if unprofiled
+baseline_mad_frp,float,MW,180-day median absolute deviation (MAD) of facility FRP,Baseline DB,Daily update,1.0 default
+frp_zscore,float,sigma,Modified z-score excursion: (FRP - Median) / (1.4826 * MAD),Statistical Engine,Continuous,0.0 if no baseline
+frp_to_baseline,float,ratio,Ratio of current FRP to baseline median,Statistical Engine,Continuous,1.0 if no baseline
+is_baseline_excursion,binary,bool,Indicator if z-score > 3.0 and ratio > 2.5,Statistical Engine,Continuous,0.0
+landcover_class,categorical,enum,"ESA WorldCover 10m class (0=Water, 1=Tree, 2=Crop, 3=Built, 4=Bare)",ESA WorldCover,Annual,3.0 default
+landcover_urban_pct,float,percent,Percentage of urban/built-up cover in 1 km radius,Copernicus,Annual,0.0
+landcover_crop_pct,float,percent,Percentage of cropland cover in 1 km radius,Copernicus,Annual,0.0
+landcover_forest_pct,float,percent,Percentage of forest/shrub cover in 1 km radius,Copernicus,Annual,0.0
+wind_speed_ms,float,m/s,10m surface wind speed from Open-Meteo NWP,Open-Meteo,Hourly,Default 3.5 m/s
+wind_direction_deg,float,degrees,10m meteorological wind direction (0-360 deg),Open-Meteo,Hourly,Default 180 deg
+temp_2m_c,float,deg C,2m ambient surface air temperature,Open-Meteo,Hourly,Default 28.0 C
+rel_humidity_pct,float,percent,2m relative humidity,Open-Meteo,Hourly,Default 55.0%
+boundary_layer_height_m,float,meters,Atmospheric boundary layer height for plume rise,Open-Meteo,Hourly,Default 800m
+downwind_facility_proximity,float,km,Distance to facility projected along downwind vector,Derived,Hourly,999.0 if upwind
+viirs_count,int,count,Number of contributing VIIRS 375m detections,FIRMS,Per pass,0
+modis_count,int,count,Number of contributing MODIS 1km detections,FIRMS,Per pass,0
+sensor_concordance_ratio,float,ratio,Agreement ratio between dual sensor passes within 3 hours,Derived,Per pass,1.0 single sensor
+swir_b12_reflectance,float,reflectance,Sentinel-2 Band 12 (2.19 um) BOA surface reflectance,Sentinel-2 L2A,5-day revisit,NaN if cloudy
+swir_b11_reflectance,float,reflectance,Sentinel-2 Band 11 (1.61 um) BOA surface reflectance,Sentinel-2 L2A,5-day revisit,NaN if cloudy
+nbr_thermal_index,float,index,Normalized Burn Ratio: (NIR - SWIR2) / (NIR + SWIR2),Sentinel-2 L2A,5-day revisit,NaN if cloudy
+cloud_shadow_mask,binary,bool,Scene classification cloud and shadow occlusion flag,Sentinel-2 SCL,5-day revisit,0
+flaring_license_active,binary,bool,Facility has active authorized flaring consent from SPCB/CPCB,Regulatory DB,Quarterly,0
+hazop_risk_tier,categorical,tier,Facility HAZOP chemical risk tier (TIER_1 high to TIER_3 low),Regulatory DB,Annual,TIER_3 default
+residential_buffer_km,float,km,Distance from fire centroid to nearest human habitation zone,OSM Settlement,Static lookup,5.0 km default

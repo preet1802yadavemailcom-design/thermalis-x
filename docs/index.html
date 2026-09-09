@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THERMALIS-X Documentation Hub & Technical Specifications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0a0e17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1f2937;
+      --border-color: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    h1 { font-size: 28px; font-weight: 700; }
+    .subtitle { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+    .btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn:hover { background: #374151; }
+    .btn-primary { background: #2563eb; border-color: #3b82f6; }
+    .btn-primary:hover { background: #1d4ed8; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .card h3 { font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+    .card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+    .card a {
+      color: var(--accent-hover);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .card a:hover { text-decoration: underline; }
+
+    .pdf-list {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    .pdf-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13px;
+    }
+    .pdf-item:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>THERMALIS-X Documentation Hub</h1>
+        <div class="subtitle">SIH Problem Statement 26162 • AI-Based Industrial Fire & Persistent Thermal Source Intelligence</div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="/" class="btn">Console View</a>
+        <a href="/docs-portal/completion.html" class="btn btn-primary">QA Traceability Matrix</a>
+      </div>
+    </header>
+
+    <h2 style="font-size: 18px; margin-bottom: 16px;">Core Technical Architecture & Specifications</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>System Architecture</h3>
+        <p>Comprehensive high-level dataflow topology, multi-tier asynchronous architecture, and component interactions.</p>
+        <a href="ARCHITECTURE.md">Read Architecture Doc &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Verified Data Sources</h3>
+        <p>Ground-truth provenance, endpoints, update cadences, and licenses for NASA FIRMS, OSM, STAC, and Open-Meteo.</p>
+        <a href="DATA_SOURCES.md">Read Data Sources Doc &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Dataset Card</h3>
+        <p>Formal Gebru et al. specification of the 2,000-sample benchmark dataset and zero-circular labeling guarantees.</p>
+        <a href="DATASET_CARD.md">Read Dataset Card &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Model Card</h3>
+        <p>Mitchell et al. model card detailing 10-class XGBoost architecture, calibration, and conformal uncertainty.</p>
+        <a href="MODEL_CARD.md">Read Model Card &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Security & Threat Model</h3>
+        <p>STRIDE threat modeling, RBAC permission matrices, input sanitization, and adversarial poisoning defense.</p>
+        <a href="SECURITY.md">Read Security Policy &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Failure Mode Analysis (FMEA)</h3>
+        <p>Exhaustive analysis of 18 remote sensing failure modes including cloud attenuation and API outages.</p>
+        <a href="FAILURE_MODE_ANALYSIS.md">Read FMEA Report &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Testing Architecture</h3>
+        <p>Overview of the 17-test unit/integration suite and 15 formal acceptance tests (AT-001 through AT-015).</p>
+        <a href="TESTING.md">Read Testing Guide &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Scientific Reproducibility</h3>
+        <p>Exact commands and locked random seeds to reproduce all models, baseline ladders, and metrics from scratch.</p>
+        <a href="REPRODUCIBILITY.md">Read Protocol &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Judge Defense & QA</h3>
+        <p>Scientifically defensible answers to 25 tough jury inquiries on AI necessity, leakage prevention, and scaling.</p>
+        <a href="JUDGE_QA.md">Read Jury Q&A &rarr;</a>
+      </div>
+    </div>
+
+    <h2 style="font-size: 18px; margin-bottom: 16px;">Automated 27-Module Technical Documentation PDFs</h2>
+    <div class="pdf-list">
+      <div class="pdf-item">
+        <span><strong>THERMALIS-X Master Technical Document</strong> (Complete 40+ page master compilation)</span>
+        <a href="pdf/THERMALIS-X_MASTER_TECHNICAL_DOCUMENT.pdf" target="_blank" class="btn" style="padding: 4px 10px; font-size: 11px;">Download PDF</a>
+      </div>
+      <div class="pdf-item"><span>01. System Overview & Executive Architecture</span><a href="pdf/01_SYSTEM_OVERVIEW.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>02. Data Ingestion Architecture & Resilient Adapters</span><a href="pdf/02_DATA_INGESTION.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>03. NASA FIRMS VIIRS & MODIS Sensor Deep Dive</span><a href="pdf/03_NASA_FIRMS.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>04. Data Validation, Quarantine & Idempotency</span><a href="pdf/04_DATA_VALIDATION.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>05. Spatiotemporal Event Engine & Lineage Tracking</span><a href="pdf/05_EVENT_ENGINE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>06. Industrial Infrastructure Spatial Indexing</span><a href="pdf/06_INDUSTRIAL_CONTEXT.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>07. Historical Facility Baseline & MAD Excursions</span><a href="pdf/07_FACILITY_BASELINE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>08. 48-Dimensional Feature Engineering Ontology</span><a href="pdf/08_FEATURE_ENGINEERING.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>09. Leakage-Free Dataset Construction & Labeling</span><a href="pdf/09_DATASET_AND_LABELING.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>10. Machine Learning Pipeline & Model Selection</span><a href="pdf/10_ML_MODEL.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>11. Baseline Ladder Evaluation & Benchmark Metrics</span><a href="pdf/11_EVALUATION.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>12. Probability Calibration & Conformal Uncertainty</span><a href="pdf/12_UNCERTAINTY_CALIBRATION.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>13. Grounded Feature Attribution (SHAP Explainer)</span><a href="pdf/13_EXPLAINABILITY.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>14. Multimodal Satellite Evidence (Sentinel-2 L2A)</span><a href="pdf/14_SATELLITE_EVIDENCE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>15. Multi-Criteria Operational Risk Priority Engine</span><a href="pdf/15_RISK_PRIORITY.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>16. Alert Engine, Deduplication & Cooldown</span><a href="pdf/16_ALERT_ENGINE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>17. GIS Operations Console & UX Architecture</span><a href="pdf/17_GIS.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>18. FastAPI Backend Architecture & OpenAPI Docs</span><a href="pdf/18_BACKEND_API.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>19. Relational PostGIS Database & Data Dictionary</span><a href="pdf/19_DATABASE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>20. Cybersecurity Architecture & Defense in Depth</span><a href="pdf/20_CYBERSECURITY.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>21. Resilience, Degraded Modes & Zero-Failure Plan</span><a href="pdf/21_RESILIENCE.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>22. Human-in-the-Loop Analyst Verification Loop</span><a href="pdf/22_HUMAN_IN_LOOP.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>23. Testing & QA Protocol (Acceptance Tests AT-001 - AT-015)</span><a href="pdf/23_TESTING_QA.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>24. Production Deployment, Docker & Scalability</span><a href="pdf/24_DEPLOYMENT.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>25. Scientific Reproducibility Audit & Lockfiles</span><a href="pdf/25_REPRODUCIBILITY.pdf" target="_blank">View PDF</a></div>
+      <div class="pdf-item"><span>26. SIH Grand Finale 5-Minute & 10-Minute Demo Guide</span><a href="pdf/26_SIH_DEMO.pdf" target="_blank">View PDF</a></div>
+    </div>
+  </div>
+</body>
+</html>

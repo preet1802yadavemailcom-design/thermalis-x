@@ -1,0 +1,39 @@
+{
+  "case_metadata": {
+    "case_id": "CASE-02-JHARIA",
+    "title": "Jharia Coal Basin Chronic Subsurface Mine Fire",
+    "region": "Dhanbad, Jharkhand, India",
+    "facility_name": "BCCL Jharia Coal Mines Complex",
+    "description": "Demonstrates persistent 180-day chronic thermal recurrence (12-19 MW) in bare mining terrain. Correctly classified as MINE_HEAT without false alarm.",
+    "historical_date": "2024-02-20"
+  },
+  "steps_count": 2,
+  "telemetry_steps": [
+    {
+      "step_index": 1,
+      "timestamp": "2024-02-20T10:15:00",
+      "action": "CHRONIC_HOTSPOT_OBSERVED",
+      "description": "VIIRS detection in BCCL Block II open-cast pit (14.2 MW). Persistent chronic thermal history detected over 180 days.",
+      "event_id": "EVT-JHARIA-20240220-01",
+      "active_observations_count": 1,
+      "current_frp": 14.2,
+      "current_area_ha": 1.2,
+      "current_class": "MINE_HEAT",
+      "current_priority": "INFORMATIONAL",
+      "alert_triggered": false
+    },
+    {
+      "step_index": 2,
+      "timestamp": "2024-02-20T22:15:00",
+      "action": "STABLE_PERIMETER_MONITORED",
+      "description": "Night-time VIIRS swath confirms stationary FRP (15.1 MW). Zero perimeter dilation. Classified safely as MINE_HEAT.",
+      "event_id": "EVT-JHARIA-20240220-01",
+      "active_observations_count": 2,
+      "current_frp": 15.1,
+      "current_area_ha": 1.2,
+      "current_class": "MINE_HEAT",
+      "current_priority": "INFORMATIONAL",
+      "alert_triggered": false
+    }
+  ]
+}

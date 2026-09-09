@@ -1,0 +1,39 @@
+{
+  "case_metadata": {
+    "case_id": "CASE-03-MORBI",
+    "title": "Morbi Ceramics Cluster vs Crop Stubble Burning Confounder",
+    "region": "Morbi, Gujarat, India",
+    "facility_name": "Morbi Ceramic Industrial Zone",
+    "description": "Demonstrates heavy agricultural stubble fires 1.4 km outside factory zones. System uses landcover, wind, and baseline envelopes to classify as AGRI_BURN rather than industrial disaster.",
+    "historical_date": "2023-11-05"
+  },
+  "steps_count": 2,
+  "telemetry_steps": [
+    {
+      "step_index": 1,
+      "timestamp": "2023-11-05T13:00:00",
+      "action": "PROXIMATE_FIRE_DETECTED",
+      "description": "VIIRS detects 24.5 MW hotspot 1.4 km from Morbi ceramic kilns. Potential confounder triage initiated.",
+      "event_id": "EVT-MORBI-20231105-01",
+      "active_observations_count": 1,
+      "current_frp": 24.5,
+      "current_area_ha": 2.0,
+      "current_class": "AGRI_BURN",
+      "current_priority": "INFORMATIONAL",
+      "alert_triggered": false
+    },
+    {
+      "step_index": 2,
+      "timestamp": "2023-11-05T17:00:00",
+      "action": "AGRICULTURAL_BURN_CONFIRMED",
+      "description": "ESA WorldCover cropland verification and downwind smoke drift confirm agricultural stubble burning outside industrial bounds.",
+      "event_id": "EVT-MORBI-20231105-01",
+      "active_observations_count": 2,
+      "current_frp": 18.0,
+      "current_area_ha": 2.5,
+      "current_class": "AGRI_BURN",
+      "current_priority": "INFORMATIONAL",
+      "alert_triggered": false
+    }
+  ]
+}

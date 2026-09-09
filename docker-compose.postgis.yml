@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: thermalis_postgis
+    environment:
+      POSTGRES_DB: thermalis
+      POSTGRES_USER: thermalis
+      POSTGRES_PASSWORD: thermalis_secure_password_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+      - ./backend/app/db/init_postgis.sql:/docker-entrypoint-initdb.d/init_postgis.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U thermalis -d thermalis"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build: .
+    container_name: thermalis_api_postgis
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://thermalis:thermalis_secure_password_dev@db:5432/thermalis
+      - DEMO_MODE=true
+      - REAL_DATA_MODE=false
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgis_data:

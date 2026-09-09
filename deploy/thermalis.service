@@ -1,0 +1,22 @@
+[Unit]
+Description=THERMALIS-X Geospatial Industrial Thermal Intelligence API & Engine
+After=network.target
+
+[Service]
+Type=simple
+User=thermalis
+Group=thermalis
+WorkingDirectory=/opt/thermalis
+Environment="PATH=/opt/thermalis/venv/bin"
+Environment="PYTHONPATH=/opt/thermalis"
+Environment="PYTHONUNBUFFERED=1"
+ExecStart=/opt/thermalis/venv/bin/uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --workers 4
+Restart=always
+RestartSec=5s
+LimitNOFILE=65535
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=thermalis
+
+[Install]
+WantedBy=multi-user.target

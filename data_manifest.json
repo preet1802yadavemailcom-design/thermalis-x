@@ -1,0 +1,27 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-09-09T00:00:00Z",
+  "system": "THERMALIS-X SIH-26162",
+  "assets": {
+    "data/processed/benchmark_dataset_v1.csv": {
+      "sha256": "ac9d15b4a3866ac9fc29ae3f6f46f4554800bcb4fc7ebeb06e33172d1e100ec7",
+      "size_bytes": 492271
+    },
+    "data/processed/benchmark_dataset_v1.parquet": {
+      "sha256": "88990df267536bb5e0adf4262ccf24ce14ec80436a1d8d28d588f99b41153fd1",
+      "size_bytes": 184468
+    },
+    "data/cases/case_01_vizag_refinery/case_data.json": {
+      "sha256": "b696beae63b4ad5846bb1a9343ed636f0d29fbff6aca639fa0ac72ee6328952b",
+      "size_bytes": 2602
+    },
+    "data/cases/case_02_jharia_coalfield/case_data.json": {
+      "sha256": "9c8dfe1cdcdeee47a8670266286f5aaeef54737df56ea6b3e9b511a763496784",
+      "size_bytes": 1538
+    },
+    "data/cases/case_03_morbi_ceramics/case_data.json": {
+      "sha256": "1bd6344ecd2bb9a1ff063807ae801c1880b8cab2dd49b6a2c5ce86437f020f46",
+      "size_bytes": 1574
+    }
+  }
+}

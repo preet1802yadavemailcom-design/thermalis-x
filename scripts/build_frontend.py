@@ -1,0 +1,889 @@
+﻿import os
+
+os.makedirs("frontend/dist", exist_ok=True)
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THERMALIS-X | Industrial Thermal Intelligence & Disaster Early Warning</title>
+  
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- Chart.js for Baseline & Trajectory curves -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #0a0e17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #1f2937;
+      --bg-glass: rgba(17, 24, 39, 0.85);
+      --border-color: #374151;
+      --border-subtle: #2d3748;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      
+      --color-critical: #ef4444;
+      --color-warning: #f59e0b;
+      --color-watch: #3b82f6;
+      --color-info: #10b981;
+      
+      --color-flare: #f97316;
+      --color-normal: #60a5fa;
+      --color-wildfire: #dc2626;
+      --color-agri: #eab308;
+      --color-mine: #a855f7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      height: 56px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+    }
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .brand-badge {
+      font-size: 10px;
+      background: #1e3a8a;
+      color: #93c5fd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .mode-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #f59e0b;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #374151; }
+    .btn-danger { background: #b91c1c; border-color: #ef4444; color: #fff; }
+    .btn-danger:hover { background: #dc2626; }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: rgba(239, 68, 68, 0.15);
+      border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 6px 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fca5a5;
+    }
+    .alert-banner strong { color: #fff; }
+
+    /* Main Container */
+    .main-layout {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Map Viewport */
+    #map {
+      flex: 1;
+      height: 100%;
+      background: #0d1117;
+    }
+
+    /* Left Sidebar: Filters & Event Feed */
+    .sidebar {
+      width: 380px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      z-index: 500;
+    }
+    .sidebar-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-title { font-size: 14px; font-weight: 600; }
+    .filter-bar {
+      padding: 10px 16px;
+      background: var(--bg-base);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+    .filter-select {
+      flex: 1;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .event-feed {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .event-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .event-card:hover {
+      border-color: #60a5fa;
+      transform: translateY(-1px);
+    }
+    .event-card.active {
+      border-color: #3b82f6;
+      background: rgba(31, 41, 55, 0.95);
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-CRITICAL { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-WARNING { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-WATCH { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .badge-INFORMATIONAL { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .card-meta {
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Right Detail Drawer */
+    .drawer {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 440px;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer.open {
+      transform: translateX(0);
+    }
+    .drawer-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface-elevated);
+    }
+    .drawer-title { font-size: 15px; font-weight: 600; }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .metric-box {
+      background: var(--bg-base);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px;
+    }
+    .metric-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    .metric-value { font-size: 16px; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+
+    /* SHAP Waterfall Breakdown */
+    .shap-item {
+      background: var(--bg-base);
+      border-left: 3px solid #3b82f6;
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+    .shap-item.positive { border-left-color: #ef4444; }
+    .shap-feat { font-weight: 600; color: #fff; }
+    .shap-desc { color: var(--text-secondary); margin-top: 2px; }
+
+    /* Replay Bottom Floating Controller */
+    .replay-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 550;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+    .replay-select {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    /* Map Legend */
+    .map-legend {
+      position: absolute;
+      bottom: 24px;
+      left: 400px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      z-index: 500;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 8px; }
+    .legend-color { width: 12px; height: 12px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">TX</div>
+      <div>
+        <div class="brand-title">THERMALIS-X</div>
+        <div style="font-size: 10px; color: var(--text-muted);">SIH 26162 • Industrial Thermal Intelligence</div>
+      </div>
+      <span class="brand-badge">v1.0.0</span>
+    </div>
+
+    <div class="header-center">
+      <div class="mode-pill">
+        <span class="pulse-dot"></span>
+        <span id="system-mode">HISTORICAL REPLAY MODE</span>
+      </div>
+      <div style="font-size: 12px; color: var(--text-secondary);">
+        Active Thermal Events: <strong id="stat-active" style="color: #fff;">5</strong>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn" onclick="resetDemoState()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset State
+      </button>
+      <a href="/docs" target="_blank" class="btn" style="text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        API Docs
+      </a>
+      <a href="/docs/index.html" target="_blank" class="btn" style="text-decoration: none;">
+        Documentation Hub
+      </a>
+    </div>
+  </header>
+
+  <!-- High-Severity Alert Banner -->
+  <div class="alert-banner" id="alert-banner">
+    <div>
+      <strong>CRITICAL ALERT [ALT-VIZAG-001]:</strong> Industrial Fire Excursion confirmed at HPCL Visakhapatnam Refinery (328.5 MW, 14.2x MAD Baseline Excursion).
+    </div>
+    <button class="btn btn-danger" style="padding: 3px 8px; font-size: 11px;" onclick="openEventDetail('EVT-VIZAG-20230814-01')">
+      Investigate Event
+    </button>
+  </div>
+
+  <!-- Main Viewport -->
+  <div class="main-layout">
+    
+    <!-- Left Sidebar: Event Feed -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Monitored Thermal Events</span>
+        <span style="font-size: 11px; color: var(--text-muted);" id="feed-count">5 Active Events</span>
+      </div>
+      
+      <div class="filter-bar">
+        <select class="filter-select" id="filter-priority" onchange="applyFilters()">
+          <option value="">All Priorities</option>
+          <option value="CRITICAL">Critical</option>
+          <option value="WARNING">Warning</option>
+          <option value="WATCH">Watch</option>
+          <option value="INFORMATIONAL">Informational</option>
+        </select>
+        <select class="filter-select" id="filter-class" onchange="applyFilters()">
+          <option value="">All Classes</option>
+          <option value="IND_ACCIDENT">Industrial Accident</option>
+          <option value="GAS_FLARE">Gas Flare</option>
+          <option value="IND_NORMAL">Normal Industrial</option>
+          <option value="MINE_HEAT">Mine Heat</option>
+          <option value="AGRI_BURN">Crop Burning</option>
+        </select>
+      </div>
+
+      <div class="event-feed" id="event-feed">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Map Viewport -->
+    <div id="map"></div>
+
+    <!-- Map Legend -->
+    <div class="map-legend">
+      <div style="font-weight: 700; color: #fff; margin-bottom: 2px;">Classification Legend</div>
+      <div class="legend-item"><div class="legend-color" style="background: var(--color-critical);"></div> Industrial Fire (Accident)</div>
+      <div class="legend-item"><div class="legend-color" style="background: var(--color-flare);"></div> Gas Flare (Steady)</div>
+      <div class="legend-item"><div class="legend-color" style="background: var(--color-normal);"></div> Normal Industrial Heat</div>
+      <div class="legend-item"><div class="legend-color" style="background: var(--color-mine);"></div> Coal Mine Heat</div>
+      <div class="legend-item"><div class="legend-color" style="background: var(--color-agri);"></div> Agricultural Burn</div>
+      <div class="legend-item"><div class="legend-color" style="background: #2563eb; border: 1px dashed #60a5fa;"></div> Industrial Facility Boundary</div>
+    </div>
+
+    <!-- Replay Controller Floating Bar -->
+    <div class="replay-bar">
+      <span style="font-size: 12px; font-weight: 600; color: #f59e0b;">CASE REPLAY:</span>
+      <select class="replay-select" id="replay-case-selector" onchange="loadCaseStudy(this.value)">
+        <option value="CASE-01-VIZAG">Case 1: HPCL Vizag Storage Fire vs Flare</option>
+        <option value="CASE-02-JHARIA">Case 2: Jharia Coalfield Chronic Mine Heat</option>
+        <option value="CASE-03-MORBI">Case 3: Morbi Ceramics vs Crop Stubble Fire</option>
+      </select>
+      <button class="btn" onclick="stepReplayBackward()">◀ Prev Step</button>
+      <span id="replay-step-label" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;">Step 1 / 4</span>
+      <button class="btn" onclick="stepReplayForward()" style="background: #2563eb; border-color: #3b82f6;">Next Step ▶</button>
+    </div>
+
+    <!-- Right Analytical Detail Drawer -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <div>
+          <div class="drawer-title" id="d-event-id">EVT-VIZAG-20230814-01</div>
+          <div style="font-size: 11px; color: var(--text-secondary);" id="d-facility">HPCL Visakhapatnam Refinery</div>
+        </div>
+        <button class="close-btn" onclick="closeDrawer()">&times;</button>
+      </div>
+
+      <div class="drawer-content">
+        <!-- Classification Verdict -->
+        <div>
+          <div class="section-title">Classification & Uncertainty Verdict</div>
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+            <span class="badge badge-CRITICAL" id="d-class-badge" style="font-size: 12px; padding: 4px 8px;">INDUSTRIAL ACCIDENT</span>
+            <span style="font-size: 12px; font-family: 'JetBrains Mono', monospace;">Calibrated: <strong id="d-prob">92.0%</strong></span>
+            <span style="font-size: 12px; color: var(--text-muted);">Uncertainty: <strong id="d-entropy">0.18</strong></span>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <div class="metric-label">Max FRP</div>
+            <div class="metric-value" id="d-frp" style="color: #ef4444;">328.5 MW</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Footprint Area</div>
+            <div class="metric-value" id="d-area">12.4 ha</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Duration</div>
+            <div class="metric-value" id="d-duration">6.0 hrs</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Priority Score</div>
+            <div class="metric-value" id="d-priority-score" style="color: #f87171;">94.5 / 100</div>
+          </div>
+        </div>
+
+        <!-- Historical Baseline Deviation Curve -->
+        <div>
+          <div class="section-title">Historical Baseline vs Current Excursion</div>
+          <div style="background: var(--bg-base); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px;">
+            <canvas id="baselineChart" height="150"></canvas>
+          </div>
+          <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;" id="d-baseline-desc">
+            Current FRP exceeds 180-day facility median (18.5 MW) by 14.2 MAD standard deviations.
+          </div>
+        </div>
+
+        <!-- Grounded SHAP Feature Explainability -->
+        <div>
+          <div class="section-title">Grounded SHAP Feature Attribution</div>
+          <div id="shap-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Satellite Multi-modal Evidence & Weather -->
+        <div>
+          <div class="section-title">Satellite Multimodal & Weather Context</div>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <div class="metric-label">Sentinel-2 Scene</div>
+              <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-top: 2px;" id="d-scene">S2B_MSIL2A_20230814</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Cloud Cover / NBR</div>
+              <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">8.5% (Cloud-Free) / -0.58</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Wind Speed & Direction</div>
+              <div style="font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-top: 2px;" id="d-weather">14.2 km/h • 215° SW</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Evidence State</div>
+              <div style="font-size: 11px; color: #10b981; font-weight: 600; margin-top: 2px;">VERIFIED OPTICAL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analyst Action & Verification Form -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <div class="section-title">Analyst Ground-Truth Verification</div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button class="btn btn-danger" style="flex: 1;" onclick="submitVerification('IND_ACCIDENT')">Confirm Disaster</button>
+            <button class="btn" style="flex: 1;" onclick="submitVerification('GAS_FLARE')">Mark Normal Flare</button>
+          </div>
+          <button class="btn" style="width: 100%; justify-content: center;" onclick="submitVerification('FALSE_ALARM')">Dismiss as False Alarm</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let map;
+    let eventMarkers = [];
+    let facilityPolygons = [];
+    let allEvents = [];
+    let currentCaseSteps = [];
+    let currentStepIdx = 0;
+    let baselineChartInstance = null;
+
+    // Initialize Leaflet Map
+    function initMap() {
+      map = L.map('map', {
+        center: [20.5937, 78.9629], // Center of India
+        zoom: 5,
+        zoomControl: false
+      });
+
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      // High-contrast Dark CartoDB Tiles
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+    }
+
+    // Fetch and render initial data
+    async function loadInitialData() {
+      try {
+        const [eventsRes, facsRes] = await Promise.all([
+          fetch('/api/v1/events'),
+          fetch('/api/v1/facilities')
+        ]);
+        allEvents = await eventsRes.json();
+        const facilities = await facsRes.json();
+
+        renderFacilityPolygons(facilities);
+        renderEvents(allEvents);
+        loadCaseStudy('CASE-01-VIZAG');
+      } catch (err) {
+        console.error('Failed to load initial data:', err);
+      }
+    }
+
+    function renderFacilityPolygons(facilities) {
+      facilities.forEach(fac => {
+        if (fac.footprint_geojson) {
+          const geom = JSON.parse(fac.footprint_geojson);
+          L.geoJSON(geom, {
+            style: {
+              color: '#3b82f6',
+              weight: 1.5,
+              dashArray: '4, 4',
+              fillColor: '#1e40af',
+              fillOpacity: 0.15
+            }
+          }).addTo(map).bindPopup(`<strong>${fac.name}</strong><br>Type: ${fac.facility_type}<br>Baseline Median FRP: ${fac.baseline_median_frp} MW`);
+        }
+      });
+    }
+
+    function getColorForClass(sourceClass) {
+      switch (sourceClass) {
+        case 'IND_ACCIDENT': return '#ef4444';
+        case 'GAS_FLARE': return '#f97316';
+        case 'IND_NORMAL': return '#60a5fa';
+        case 'MINE_HEAT': return '#a855f7';
+        case 'AGRI_BURN': return '#eab308';
+        case 'WILDFIRE': return '#dc2626';
+        default: return '#9ca3af';
+      }
+    }
+
+    function renderEvents(events) {
+      // Clear existing markers
+      eventMarkers.forEach(m => map.removeLayer(m));
+      eventMarkers = [];
+
+      const feedContainer = document.getElementById('event-feed');
+      feedContainer.innerHTML = '';
+      document.getElementById('feed-count').innerText = `${events.length} Active Events`;
+
+      events.forEach(ev => {
+        const color = getColorForClass(ev.source_class);
+        const radius = Math.min(22, Math.max(8, Math.sqrt(ev.max_frp) * 1.4));
+
+        // Create CircleMarker
+        const marker = L.circleMarker([ev.centroid_lat, ev.centroid_lon], {
+          radius: radius,
+          fillColor: color,
+          color: '#fff',
+          weight: 1.5,
+          opacity: 0.9,
+          fillOpacity: 0.8
+        }).addTo(map);
+
+        marker.on('click', () => openEventDetail(ev.id));
+        eventMarkers.push(marker);
+
+        // Append to Sidebar Feed
+        const card = document.createElement('div');
+        card.className = `event-card ${ev.priority === 'CRITICAL' ? 'active' : ''}`;
+        card.onclick = () => openEventDetail(ev.id);
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="badge badge-${ev.priority}">${ev.priority}</span>
+            <span style="font-size: 11px; color: ${color}; font-weight: 700;">${ev.source_class.replace('_', ' ')}</span>
+          </div>
+          <div class="card-title">${ev.nearest_facility_name || 'Industrial Area'}</div>
+          <div class="card-meta">
+            <span>FRP: ${ev.max_frp} MW</span>
+            <span>Dist: ${ev.distance_to_facility_km ? ev.distance_to_facility_km + ' km' : 'N/A'}</span>
+          </div>
+        `;
+        feedContainer.appendChild(card);
+      });
+    }
+
+    async function openEventDetail(eventId) {
+      try {
+        const res = await fetch(`/api/v1/events/${eventId}`);
+        const event = await res.json();
+
+        document.getElementById('d-event-id').innerText = event.id;
+        document.getElementById('d-facility').innerText = event.nearest_facility_id || 'Regional Hotspot';
+        document.getElementById('d-class-badge').innerText = event.source_class.replace('_', ' ');
+        document.getElementById('d-class-badge').className = `badge badge-${event.priority}`;
+        document.getElementById('d-prob').innerText = `${(event.calibrated_prob * 100).toFixed(1)}%`;
+        document.getElementById('d-entropy').innerText = event.uncertainty.toFixed(2);
+        document.getElementById('d-frp').innerText = `${event.max_frp} MW`;
+        document.getElementById('d-area').innerText = `${event.area_ha} ha`;
+        document.getElementById('d-duration').innerText = `${event.duration_hours} hrs`;
+        document.getElementById('d-priority-score').innerText = `${event.priority_score} / 100`;
+
+        // Render SHAP waterfall
+        const shapContainer = document.getElementById('shap-container');
+        shapContainer.innerHTML = '';
+        if (event.shap_explanation && event.shap_explanation.top_contributions) {
+          event.shap_explanation.top_contributions.forEach(item => {
+            const div = document.createElement('div');
+            div.className = `shap-item ${item.impact.startsWith('+') ? 'positive' : ''}`;
+            div.innerHTML = `
+              <div style="display: flex; justify-content: space-between;">
+                <span class="shap-feat">${item.feature}: ${item.value}</span>
+                <span style="font-weight: 700; color: ${item.impact.startsWith('+') ? '#ef4444' : '#10b981'};">${item.impact}</span>
+              </div>
+              <div class="shap-desc">${item.reason}</div>
+            `;
+            shapContainer.appendChild(div);
+          });
+        }
+
+        // Render Baseline Chart
+        renderBaselineChart(event.max_frp);
+
+        // Center map on event
+        map.flyTo([event.centroid_lat, event.centroid_lon], 13, { duration: 1.2 });
+
+        document.getElementById('drawer').classList.add('open');
+      } catch (err) {
+        console.error('Error loading event detail:', err);
+      }
+    }
+
+    function renderBaselineChart(currentFrp) {
+      const ctx = document.getElementById('baselineChart').getContext('2d');
+      if (baselineChartInstance) baselineChartInstance.destroy();
+
+      baselineChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['P10 Normal', 'Median Normal', 'P90 Normal', 'P99 Threshold', 'Current Event'],
+          datasets: [{
+            label: 'Radiative Power (MW)',
+            data: [12.0, 18.5, 27.0, 38.0, currentFrp],
+            backgroundColor: [
+              'rgba(96, 165, 250, 0.4)',
+              'rgba(59, 130, 246, 0.6)',
+              'rgba(37, 99, 235, 0.8)',
+              'rgba(245, 158, 11, 0.8)',
+              currentFrp > 50 ? 'rgba(239, 68, 68, 0.9)' : 'rgba(16, 185, 129, 0.9)'
+            ],
+            borderColor: [
+              '#60a5fa', '#3b82f6', '#2563eb', '#f59e0b', currentFrp > 50 ? '#ef4444' : '#10b981'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: '#1f2937' },
+              ticks: { color: '#9ca3af' }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#9ca3af', font: { size: 10 } }
+            }
+          }
+        }
+      });
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawer').classList.remove('open');
+    }
+
+    // Replay Step Controller
+    async function loadCaseStudy(caseId) {
+      try {
+        const res = await fetch(`/api/v1/replay/cases/${caseId}/steps`);
+        currentCaseSteps = await res.json();
+        currentStepIdx = 0;
+        applyReplayStep(currentCaseSteps[0]);
+      } catch (err) {
+        console.error('Failed to load replay case steps:', err);
+      }
+    }
+
+    function stepReplayForward() {
+      if (currentStepIdx < currentCaseSteps.length - 1) {
+        currentStepIdx++;
+        applyReplayStep(currentCaseSteps[currentStepIdx]);
+      }
+    }
+
+    function stepReplayBackward() {
+      if (currentStepIdx > 0) {
+        currentStepIdx--;
+        applyReplayStep(currentCaseSteps[currentStepIdx]);
+      }
+    }
+
+    function applyReplayStep(step) {
+      document.getElementById('replay-step-label').innerText = `Step ${step.step_index} / ${currentCaseSteps.length}`;
+      openEventDetail(step.event_id);
+    }
+
+    function applyFilters() {
+      const priority = document.getElementById('filter-priority').value;
+      const cls = document.getElementById('filter-class').value;
+
+      let filtered = allEvents;
+      if (priority) filtered = filtered.filter(e => e.priority === priority);
+      if (cls) filtered = filtered.filter(e => e.source_class === cls);
+      renderEvents(filtered);
+    }
+
+    async function submitVerification(verdictClass) {
+      const eventId = document.getElementById('d-event-id').innerText;
+      try {
+        await fetch('/api/v1/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_id: eventId,
+            verified_class: verdictClass,
+            confidence: 1.0,
+            notes: "Verified by lead disaster analyst during live operational review.",
+            evidence_reviewed: ["Sentinel-2 L2A SWIR", "Facility MAD Baseline"]
+          })
+        });
+        alert(`Verification recorded: Event ${eventId} updated to ${verdictClass}.`);
+        loadInitialData();
+      } catch (err) {
+        alert('Failed to submit feedback.');
+      }
+    }
+
+    function resetDemoState() {
+      window.location.reload();
+    }
+
+    window.onload = () => {
+      initMap();
+      loadInitialData();
+    };
+  </script>
+</body>
+</html>
+"""
+
+with open("frontend/dist/index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Enterprise GIS Operations Console built successfully at frontend/dist/index.html")

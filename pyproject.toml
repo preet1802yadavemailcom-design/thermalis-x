@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thermalis-x"
+version = "1.0.0"
+description = "AI-Based Detection and Classification of Industrial Fires and Persistent Thermal Sources Using NASA FIRMS, OSM and Satellite Data"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "THERMALIS-X Team", email = "team@thermalis-x.internal" }]
+license = { text = "Apache-2.0" }
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"

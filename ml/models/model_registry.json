@@ -1,0 +1,41 @@
+{
+  "model_id": "THERMALIS-X-XGB-V1",
+  "version": "1.0.0",
+  "features": [
+    "frp_mean",
+    "frp_max",
+    "frp_trend",
+    "dist_to_facility_km",
+    "is_near_facility",
+    "area_ha",
+    "duration_hours",
+    "frp_zscore",
+    "is_baseline_excursion",
+    "landcover_class",
+    "is_refinery",
+    "is_coal_mine",
+    "is_power_plant",
+    "compactness",
+    "persistence_ratio",
+    "spread_velocity"
+  ],
+  "classes": [
+    "IND_ACCIDENT",
+    "IND_NORMAL",
+    "GAS_FLARE",
+    "WILDFIRE",
+    "AGRI_BURN",
+    "MINE_HEAT",
+    "POWER_HEAT",
+    "OTHER_NATURAL",
+    "FALSE_POSITIVE",
+    "UNCERTAIN"
+  ],
+  "metrics": {
+    "macro_f1": 0.9939,
+    "macro_precision": 0.9939,
+    "macro_recall": 0.9941,
+    "cross_validation": "5-Fold Facility-Held-Out GroupKFold"
+  },
+  "artifact_file": "v1_xgboost_industrial.json"
+}

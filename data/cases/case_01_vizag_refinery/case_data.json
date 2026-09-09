@@ -1,0 +1,65 @@
+{
+  "case_metadata": {
+    "case_id": "CASE-01-VIZAG",
+    "title": "HPCL Visakhapatnam Refinery Storage Tank Fire vs Gas Flare",
+    "region": "Visakhapatnam, Andhra Pradesh, India",
+    "facility_name": "HPCL Visakhapatnam Refinery",
+    "description": "Demonstrates normal steady flaring (18-24 MW) escalating into a massive off-stack storage tank fire (320 MW) with baseline violation and critical priority alert.",
+    "historical_date": "2023-08-14"
+  },
+  "steps_count": 4,
+  "telemetry_steps": [
+    {
+      "step_index": 1,
+      "timestamp": "2023-08-14T14:30:00",
+      "action": "OBSERVATION_INGESTED",
+      "description": "VIIRS NOAA-20 detection at HPCL Vizag flare stack (19.4 MW). FRP matches historical baseline median.",
+      "event_id": "EVT-VIZAG-20230814-01",
+      "active_observations_count": 1,
+      "current_frp": 19.4,
+      "current_area_ha": 0.5,
+      "current_class": "GAS_FLARE",
+      "current_priority": "INFORMATIONAL",
+      "alert_triggered": false
+    },
+    {
+      "step_index": 2,
+      "timestamp": "2023-08-14T17:30:00",
+      "action": "THERMAL_SURGE_DETECTED",
+      "description": "VIIRS NOAA-21 pass detects rapid thermal surge to 142.0 MW. Off-stack location detected 280m south of flare stack.",
+      "event_id": "EVT-VIZAG-20230814-01",
+      "active_observations_count": 3,
+      "current_frp": 142.0,
+      "current_area_ha": 3.8,
+      "current_class": "IND_ACCIDENT",
+      "current_priority": "WARNING",
+      "alert_triggered": true
+    },
+    {
+      "step_index": 3,
+      "timestamp": "2023-08-14T20:30:00",
+      "action": "CRITICAL_EXCURSION_PEAK",
+      "description": "MODIS Aqua & VIIRS pass detects catastrophic peak at 328.5 MW with footprint expanding to 12.4 ha. Stark baseline MAD z-score (14.2).",
+      "event_id": "EVT-VIZAG-20230814-01",
+      "active_observations_count": 8,
+      "current_frp": 328.5,
+      "current_area_ha": 12.4,
+      "current_class": "IND_ACCIDENT",
+      "current_priority": "CRITICAL",
+      "alert_triggered": true
+    },
+    {
+      "step_index": 4,
+      "timestamp": "2023-08-15T04:30:00",
+      "action": "CONTAINMENT_AND_DECAY",
+      "description": "Thermal suppression underway. FRP decays to 45.0 MW. Footprint stabilizing. Analyst confirms industrial storage incident.",
+      "event_id": "EVT-VIZAG-20230814-01",
+      "active_observations_count": 12,
+      "current_frp": 45.0,
+      "current_area_ha": 8.0,
+      "current_class": "IND_ACCIDENT",
+      "current_priority": "WATCH",
+      "alert_triggered": false
+    }
+  ]
+}

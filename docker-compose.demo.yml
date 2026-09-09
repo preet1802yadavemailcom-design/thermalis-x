@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: thermalis_api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./thermalis.db
+      - DEMO_MODE=true
+      - REAL_DATA_MODE=false
+    volumes:
+      - ./thermalis.db:/app/thermalis.db
+    restart: unless-stopped
